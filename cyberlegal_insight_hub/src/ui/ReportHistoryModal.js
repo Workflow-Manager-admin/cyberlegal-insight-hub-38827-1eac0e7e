@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { getReports, getReportById } from "../logic/UserReportStore";
+import HistoryTimeline from "./HistoryTimeline";
 
 /**
  * PUBLIC_INTERFACE
@@ -7,6 +8,7 @@ import { getReports, getReportById } from "../logic/UserReportStore";
  * - Fetches from localStorage (or guest session) according to user
  * - Lists all saved reports with actions: View, Download, Share, Delete
  * - Styled as modal matching app's visual theme
+ * - Now includes interactive timeline and comparison panel
  */
 function formatDate(dateString) {
   // Nice date, fallback for bad parse
@@ -69,6 +71,7 @@ function ReportHistoryModal({ isOpen, onClose, user }) {
   const [selectedReportId, setSelectedReportId] = useState(null);
   const [previewReport, setPreviewReport] = useState(null);
   const [toast, setToast] = useState("");
+  const [compareIds, setCompareIds] = useState([]);
 
   // Always run, update report list depending on modal/user state
   useEffect(() => {
@@ -89,6 +92,21 @@ function ReportHistoryModal({ isOpen, onClose, user }) {
       setPreviewReport(null);
     }
   }, [selectedReportId, user]);
+
+  // New: Sync timeline compare selection
+  useEffect(() => {
+    if (compareIds.length === 1 && user) {
+      const report = getReportById(user, compareIds[0]);
+      setPreviewReport(report);
+      setSelectedReportId(compareIds[0]);
+    } else if (compareIds.length === 2 && user) {
+      setPreviewReport(null);
+      setSelectedReportId(null);
+    } else if (compareIds.length === 0) {
+      setPreviewReport(null);
+      setSelectedReportId(null);
+    }
+  }, [compareIds, user]);
 
   // Toast timeout effect (always called)
   useEffect(() => {
@@ -209,6 +227,18 @@ function ReportHistoryModal({ isOpen, onClose, user }) {
             role="status" aria-live="polite"
           >{toast}</div>
         )}
+        {/* INTERACTIVE TIMELINE */}
+        <HistoryTimeline
+          reports={reports}
+          onCompare={setCompareIds}
+          defaultCompareIds={compareIds}
+        />
+        {compareIds.length === 2 && (
+          <ReportComparisonPanel
+            reportA={reports.find(r => r.id === compareIds[0])}
+            reportB={reports.find(r => r.id === compareIds[1])}
+          />
+        )}
         {reports && reports.length ? (
           <ul style={{ padding: 0, listStyle: "none", marginBottom: 0 }}>
             {reports.map((r, idx) => (
@@ -249,7 +279,7 @@ function ReportHistoryModal({ isOpen, onClose, user }) {
                       className="dashboard-action-btn"
                       title="View details"
                       style={{fontSize:15,padding:"3px 8px"}}
-                      onClick={() => setSelectedReportId(r.id)}
+                      onClick={() => { setSelectedReportId(r.id); setCompareIds([]); }}
                     >👁️</button>
                     <button
                       className="dashboard-action-btn"
@@ -369,6 +399,110 @@ function ReportHistoryModal({ isOpen, onClose, user }) {
           to { opacity:1; }
         }
       `}</style>
+    </div>
+  );
+}
+
+/**
+ * Panel to show side-by-side comparison of two reports
+ * Props: reportA, reportB (both report objects)
+ */
+function ReportComparisonPanel({ reportA, reportB }) {
+  if (!reportA || !reportB) return null;
+
+  // For display order: show newest on left (lower index is newer in timeline)
+  const isAnewer = (new Date(reportA.date || reportA.timestamp)) > (new Date(reportB.date || reportB.timestamp));
+  const left = isAnewer ? reportA : reportB;
+  const right = isAnewer ? reportB : reportA;
+
+  // Helper for diffs
+  function highlightDiff(field, valA, valB) {
+    if (valA === valB) return <span>{valA ?? "-"}</span>;
+    return (
+      <span>
+        <span style={{ background: "#fbbf2480", borderRadius: 4, padding: "0 5px", fontWeight: 600 }}>{valA ?? "-"}</span>
+        <span style={{ color: "#b82727", margin: "0 7px" }}>→</span>
+        <span style={{ background: "#178f4255", borderRadius: 4, padding: "0 5px", fontWeight: 600 }}>{valB ?? "-"}</span>
+      </span>
+    );
+  }
+
+  // Key fields for compare
+  const FIELDS = [
+    ["Quiz Score", "quizScore"],
+    ["Contract Risk", "contractRisk"],
+    ["Overall Score", "overall.riskScore"],
+    ["Risk Level", "overall.riskGrade"],
+    ["Contract Findings", "contractFlags"],
+    ["Contract Recs", "contractRecs"],
+  ];
+
+  function getField(r, key) {
+    if (key.includes(".")) {
+      const [k, sub] = key.split(".");
+      return r[k]?.[sub];
+    }
+    return r[key];
+  }
+  function renderListDiff(a, b) {
+    if (JSON.stringify(a) === JSON.stringify(b)) return <span>{Array.isArray(a)?a.join("; "):"-"}</span>;
+    return (
+      <span>
+        <span style={{ background: "#fbbf2480", borderRadius: 4, padding: "0 4px", fontWeight: 600 }}>{Array.isArray(a)?a.join("; "):"-"}</span>
+        <span style={{ color: "#b82727", margin: "0 7px" }}>→</span>
+        <span style={{ background: "#178f4255", borderRadius: 4, padding: "0 4px", fontWeight: 600 }}>{Array.isArray(b)?b.join("; "):"-"}</span>
+      </span>
+    );
+  }
+
+  return (
+    <div
+      className="glass-card"
+      style={{
+        marginTop: 13,
+        background: "rgba(37,99,235,0.07)",
+        border: "1.5px solid var(--accent,#fbbf24)",
+        borderRadius: 14,
+        padding: "21px 13px",
+        fontSize:15.1,
+        fontWeight:500,
+        boxShadow: "0 2.5px 12px #2563eb11",
+      }}
+    >
+      <div style={{display:"flex",justifyContent:"space-between",alignItems:"center"}}>
+        <h4 style={{margin:"0 0 13px 4px",color:"var(--primary,#2563eb)",fontWeight:800,fontSize:"1.09rem"}}>
+          Report Comparison
+        </h4>
+        <span style={{color:"var(--kavia-orange,#E87A41)",fontWeight:700,fontSize:13}}>
+          #{left.id === reportA.id ? "A":"B"} vs #{right.id === reportB.id ? "B":"A"}
+        </span>
+      </div>
+      <table style={{width:"100%",fontSize:14.2,borderCollapse:"collapse"}}>
+        <thead>
+          <tr>
+            <th style={{textAlign:"left", paddingBottom:4, color:"var(--primary,#2563eb)", fontSize:13.5, fontWeight:700}}>Field</th>
+            <th style={{color:"#222", paddingBottom:4}}>Report A</th>
+            <th style={{color:"#222", paddingBottom:4}}>Report B</th>
+          </tr>
+        </thead>
+        <tbody>
+          {FIELDS.map(([label, key])=>(
+            <tr key={key} style={{background:"rgba(251,191,36,0.08)"}}>
+              <td style={{fontWeight:600,padding:"7px 5px 7px 0",minWidth: 105}}>{label}</td>
+              <td style={{padding:"7px 7px"}}>{
+                key.includes("contract") 
+                  ? renderListDiff(getField(left, key), getField(right, key))
+                  : highlightDiff(label, getField(left, key), getField(right, key))
+              }</td>
+              <td style={{padding:"7px 7px"}}>{
+                key.includes("contract") 
+                  ? renderListDiff(getField(right, key), getField(left, key))
+                  : highlightDiff(label, getField(right, key), getField(left, key))
+              }</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 }
