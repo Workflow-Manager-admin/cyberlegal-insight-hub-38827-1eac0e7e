@@ -7,57 +7,91 @@
 <i> [webpack-dev-server] On Your Network (IPv4): http://172.17.0.2:3000/
 <i> [webpack-dev-server] Content not from webpack is served from './public' directory
 Injecting EditorRootWrapper import: ../.ve/EditorRootWrapper
-asset bundle.js 1.55 MiB [emitted] (name: main)
+asset bundle.js 1.5 MiB [emitted] (name: main)
 asset index.html 1.92 KiB [emitted]
 runtime modules 27.5 KiB 14 modules
-cacheable modules 1.38 MiB
+cacheable modules 1.34 MiB
   modules by path ./node_modules/ 1.24 MiB 31 modules
-  modules by path ./src/ 134 KiB 21 modules
+  modules by path ./src/ 89.9 KiB 18 modules
   modules by path ./.ve/ 15.1 KiB
     modules by path ./.ve/*.js 10.6 KiB 2 modules
     modules by path ./.ve/*.css 2.93 KiB
       ./.ve/EditorOverlay.css 2.25 KiB [built] [code generated]
       ./node_modules/css-loader/dist/cjs.js!./.ve/EditorOverlay.css 697 bytes [built] [code generated]
     ./.ve/EditorOverlay.jsx 1.58 KiB [built] [code generated]
-webpack 5.99.9 compiled successfully in 1760 ms
+
+ERROR in ./src/steps/StepDashboard.js
+Module build failed (from ./node_modules/babel-loader/lib/index.js):
+SyntaxError: /home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/src/steps/StepDashboard.js: Identifier 'saveReport' has already been declared. (336:9)
+
+  334 | import { saveReport } from "../logic/UserReportStore";
+  335 |
+> 336 | import { saveReport } from "../logic/UserReportStore";
+      |          ^
+  337 |
+  338 | function StepDashboard({
+  339 |   goToNextStep,
+    at constructor (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/parser/lib/index.js:363:19)
+    at JSXParserMixin.raise (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/parser/lib/index.js:6609:19)
+    at ScopeHandler.checkRedeclarationInScope (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/parser/lib/index.js:1626:19)
+    at ScopeHandler.declareName (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/parser/lib/index.js:1592:12)
+    at JSXParserMixin.declareNameFromIdentifier (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/parser/lib/index.js:7538:16)
+    at JSXParserMixin.checkIdentifier (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/parser/lib/index.js:7534:12)
+    at JSXParserMixin.checkLVal (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/parser/lib/index.js:7475:12)
+    at JSXParserMixin.finishImportSpecifier (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/parser/lib/index.js:14184:10)
+    at JSXParserMixin.parseImportSpecifier (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/parser/lib/index.js:14341:17)
+    at JSXParserMixin.parseNamedImportSpecifiers (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/parser/lib/index.js:14320:36)
+    at JSXParserMixin.parseImportSpecifiersAndAfter (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/parser/lib/index.js:14160:37)
+    at JSXParserMixin.parseImport (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/parser/lib/index.js:14153:17)
+    at JSXParserMixin.parseStatementContent (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/parser/lib/index.js:12795:27)
+    at JSXParserMixin.parseStatementLike (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/parser/lib/index.js:12685:17)
+    at JSXParserMixin.parseModuleItem (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/parser/lib/index.js:12662:17)
+    at JSXParserMixin.parseBlockOrModuleBlockBody (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/parser/lib/index.js:13235:36)
+    at JSXParserMixin.parseBlockBody (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/parser/lib/index.js:13228:10)
+    at JSXParserMixin.parseProgram (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/parser/lib/index.js:12541:10)
+    at JSXParserMixin.parseTopLevel (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/parser/lib/index.js:12531:25)
+    at JSXParserMixin.parse (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/parser/lib/index.js:14410:10)
+    at parse (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/parser/lib/index.js:14444:38)
+    at parser (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/core/lib/parser/index.js:41:34)
+    at parser.next (<anonymous>)
+    at normalizeFile (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/core/lib/transformation/normalize-file.js:64:37)
+    at normalizeFile.next (<anonymous>)
+    at run (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/core/lib/transformation/index.js:22:50)
+    at run.next (<anonymous>)
+    at transform (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/core/lib/transform.js:22:33)
+    at transform.next (<anonymous>)
+    at step (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/gensync/index.js:261:32)
+    at /home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/gensync/index.js:273:13
+    at async.call.result.err.err (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/gensync/index.js:223:11)
+ @ ./src/containers/MainContainer.js 21:0-51 40:13-26
+ @ ./src/App.js 3:0-55 178:36-49
+ @ ./src/index.js 5:0-24 11:32-35
+
+webpack 5.99.9 compiled with 1 error in 1668 ms
 assets by status 1.92 KiB [cached] 1 asset
-assets by path *.js 1.6 MiB
+assets by path *.js 1.63 MiB
   asset bundle.js 1.56 MiB [emitted] (name: main)
-  asset main.0ace01a743630c0e8086.hot-update.js 48.3 KiB [emitted] [immutable] [hmr] (name: main)
-asset main.0ace01a743630c0e8086.hot-update.json 28 bytes [emitted] [immutable] [hmr]
-Entrypoint main 1.6 MiB = bundle.js 1.56 MiB main.0ace01a743630c0e8086.hot-update.js 48.3 KiB
-cached modules 1.35 MiB [cached] 56 modules
+  asset main.fcabd164c36b098d1785.hot-update.js 75.1 KiB [emitted] [immutable] [hmr] (name: main)
+asset main.fcabd164c36b098d1785.hot-update.json 28 bytes [emitted] [immutable] [hmr]
+Entrypoint main 1.63 MiB = bundle.js 1.56 MiB main.fcabd164c36b098d1785.hot-update.js 75.1 KiB
+cached modules 1.34 MiB [cached] 52 modules
 runtime modules 27.5 KiB 14 modules
-javascript modules 37.7 KiB
-  ./src/steps/StepDashboard.js 34.8 KiB [built] [code generated]
-  ./src/logic/UserReportStore.js 2.94 KiB [built] [code generated]
-webpack 5.99.9 compiled successfully in 229 ms
-assets by status 1.92 KiB [cached] 1 asset
-assets by path *.js 1.6 MiB
-  asset bundle.js 1.56 MiB [emitted] (name: main)
-  asset main.2ccad723765674ef7e44.hot-update.js 46.3 KiB [emitted] [immutable] [hmr] (name: main)
-asset main.2ccad723765674ef7e44.hot-update.json 28 bytes [emitted] [immutable] [hmr]
-Entrypoint main 1.6 MiB = bundle.js 1.56 MiB main.2ccad723765674ef7e44.hot-update.js 46.3 KiB
-cached modules 1.35 MiB [cached] 57 modules
-runtime modules 27.5 KiB 14 modules
-./src/steps/StepDashboard.js 36.5 KiB [built] [code generated]
-webpack 5.99.9 compiled successfully in 156 ms
-assets by status 1.92 KiB [cached] 1 asset
-assets by path *.js 1.57 MiB
-  asset bundle.js 1.56 MiB [emitted] (name: main)
-  asset main.9866ffdff47a6234d4f5.hot-update.js 8.51 KiB [emitted] [immutable] [hmr] (name: main)
-asset main.9866ffdff47a6234d4f5.hot-update.json 28 bytes [emitted] [immutable] [hmr]
-Entrypoint main 1.57 MiB = bundle.js 1.56 MiB main.9866ffdff47a6234d4f5.hot-update.js 8.51 KiB
-cached modules 1.38 MiB [cached] 57 modules
-runtime modules 27.5 KiB 14 modules
-./src/containers/MainContainer.js 5.05 KiB [built] [code generated]
-webpack 5.99.9 compiled successfully in 70 ms
+javascript modules 53.9 KiB
+  modules by path ./src/steps/ 44.1 KiB
+    ./src/steps/StepDashboard.js 36.5 KiB [built] [code generated]
+    ./src/steps/StepDashboard.css 2.28 KiB [built] [code generated]
+    ./node_modules/css-loader/dist/cjs.js!./src/steps/StepDashboard.css 5.38 KiB [built] [code generated]
+  modules by path ./src/logic/*.js 4.7 KiB
+    ./src/logic/SmartRiskEngine.js 1.75 KiB [built] [code generated]
+    ./src/logic/UserReportStore.js 2.94 KiB [built] [code generated]
+  ./src/containers/MainContainer.js 5.05 KiB [code generated]
+webpack 5.99.9 compiled successfully in 299 ms
 assets by status 1.92 KiB [cached] 1 asset
 assets by path *.js 1.51 MiB
   asset bundle.js 1.5 MiB [emitted] (name: main)
-  asset main.7167d74c555bd7b92685.hot-update.js 6.78 KiB [emitted] [immutable] [hmr] (name: main)
-asset main.7167d74c555bd7b92685.hot-update.json 195 bytes [emitted] [immutable] [hmr]
-Entrypoint main 1.51 MiB = bundle.js 1.5 MiB main.7167d74c555bd7b92685.hot-update.js 6.78 KiB
+  asset main.8b77d1de19a5b3a97ebd.hot-update.js 6.79 KiB [emitted] [immutable] [hmr] (name: main)
+asset main.8b77d1de19a5b3a97ebd.hot-update.json 195 bytes [emitted] [immutable] [hmr]
+Entrypoint main 1.51 MiB = bundle.js 1.5 MiB main.8b77d1de19a5b3a97ebd.hot-update.js 6.79 KiB
 cached modules 1.34 MiB [cached] 52 modules
 runtime modules 27.5 KiB 14 modules
 javascript modules 5.09 KiB
@@ -66,15 +100,15 @@ javascript modules 5.09 KiB
 
 ERROR in ./src/steps/StepDashboard.js
 Module build failed (from ./node_modules/babel-loader/lib/index.js):
-SyntaxError: /home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/src/steps/StepDashboard.js: Identifier 'saveReport' has already been declared. (336:9)
+SyntaxError: /home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/src/steps/StepDashboard.js: Identifier 'saveReport' has already been declared. (335:9)
 
-  334 | import { saveReport } from "../logic/UserReportStore";
-  335 |
-> 336 | import { saveReport } from "../logic/UserReportStore";
+  333 |  * Populates actionable content in all result tabs based on user data.
+  334 |  */
+> 335 | import { saveReport } from "../logic/UserReportStore";
       |          ^
-  337 |
-  338 | function StepDashboard({
-  339 |   goToNextStep,
+  336 |
+  337 | function StepDashboard({
+  338 |   goToNextStep,
     at constructor (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/parser/lib/index.js:363:19)
     at JSXParserMixin.raise (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/parser/lib/index.js:6609:19)
     at ScopeHandler.checkRedeclarationInScope (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/parser/lib/index.js:1626:19)
@@ -111,56 +145,26 @@ SyntaxError: /home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-
  @ ./src/App.js 3:0-55 178:36-49
  @ ./src/index.js 5:0-24 11:32-35
 
-webpack 5.99.9 compiled with 1 error in 59 ms
-assets by status 1.5 MiB [cached] 2 assets
-cached modules 1.34 MiB (javascript) 27.5 KiB (runtime) [cached] 67 modules
-./src/steps/StepDashboard.js 39 bytes [built] [1 error]
-
-ERROR in ./src/steps/StepDashboard.js
-Module build failed (from ./node_modules/babel-loader/lib/index.js):
-SyntaxError: /home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/src/steps/StepDashboard.js: Identifier 'saveReport' has already been declared. (336:9)
-
-  334 | import { saveReport } from "../logic/UserReportStore";
-  335 |
-> 336 | import { saveReport } from "../logic/UserReportStore";
-      |          ^
-  337 |
-  338 | function StepDashboard({
-  339 |   goToNextStep,
-    at constructor (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/parser/lib/index.js:363:19)
-    at JSXParserMixin.raise (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/parser/lib/index.js:6609:19)
-    at ScopeHandler.checkRedeclarationInScope (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/parser/lib/index.js:1626:19)
-    at ScopeHandler.declareName (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/parser/lib/index.js:1592:12)
-    at JSXParserMixin.declareNameFromIdentifier (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/parser/lib/index.js:7538:16)
-    at JSXParserMixin.checkIdentifier (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/parser/lib/index.js:7534:12)
-    at JSXParserMixin.checkLVal (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/parser/lib/index.js:7475:12)
-    at JSXParserMixin.finishImportSpecifier (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/parser/lib/index.js:14184:10)
-    at JSXParserMixin.parseImportSpecifier (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/parser/lib/index.js:14341:17)
-    at JSXParserMixin.parseNamedImportSpecifiers (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/parser/lib/index.js:14320:36)
-    at JSXParserMixin.parseImportSpecifiersAndAfter (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/parser/lib/index.js:14160:37)
-    at JSXParserMixin.parseImport (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/parser/lib/index.js:14153:17)
-    at JSXParserMixin.parseStatementContent (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/parser/lib/index.js:12795:27)
-    at JSXParserMixin.parseStatementLike (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/parser/lib/index.js:12685:17)
-    at JSXParserMixin.parseModuleItem (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/parser/lib/index.js:12662:17)
-    at JSXParserMixin.parseBlockOrModuleBlockBody (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/parser/lib/index.js:13235:36)
-    at JSXParserMixin.parseBlockBody (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/parser/lib/index.js:13228:10)
-    at JSXParserMixin.parseProgram (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/parser/lib/index.js:12541:10)
-    at JSXParserMixin.parseTopLevel (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/parser/lib/index.js:12531:25)
-    at JSXParserMixin.parse (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/parser/lib/index.js:14410:10)
-    at parse (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/parser/lib/index.js:14444:38)
-    at parser (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/core/lib/parser/index.js:41:34)
-    at parser.next (<anonymous>)
-    at normalizeFile (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/core/lib/transformation/normalize-file.js:64:37)
-    at normalizeFile.next (<anonymous>)
-    at run (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/core/lib/transformation/index.js:22:50)
-    at run.next (<anonymous>)
-    at transform (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/core/lib/transform.js:22:33)
-    at transform.next (<anonymous>)
-    at step (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/gensync/index.js:261:32)
-    at /home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/gensync/index.js:273:13
-    at async.call.result.err.err (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/gensync/index.js:223:11)
- @ ./src/containers/MainContainer.js 21:0-51 40:13-26
- @ ./src/App.js 3:0-55 178:36-49
- @ ./src/index.js 5:0-24 11:32-35
-
-webpack 5.99.9 compiled with 1 error in 51 ms
+webpack 5.99.9 compiled with 1 error in 55 ms
+assets by status 1.92 KiB [cached] 1 asset
+assets by path *.js 1.62 MiB
+  asset bundle.js 1.55 MiB [emitted] (name: main)
+  asset main.24d9be8c2e6becdf9178.hot-update.js 63.4 KiB [emitted] [immutable] [hmr] (name: main)
+asset main.24d9be8c2e6becdf9178.hot-update.json 28 bytes [emitted] [immutable] [hmr]
+Entrypoint main 1.62 MiB = bundle.js 1.55 MiB main.24d9be8c2e6becdf9178.hot-update.js 63.4 KiB
+cached modules 1.35 MiB [cached] 55 modules
+runtime modules 27.5 KiB 14 modules
+javascript modules 41.5 KiB
+  ./src/containers/MainContainer.js 5.05 KiB [code generated]
+  ./src/steps/StepDashboard.js 36.4 KiB [built] [code generated]
+webpack 5.99.9 compiled successfully in 123 ms
+assets by status 1.92 KiB [cached] 1 asset
+assets by path *.js 1.61 MiB
+  asset bundle.js 1.56 MiB [emitted] (name: main)
+  asset main.a475de9b4ead6da36a18.hot-update.js 50.1 KiB [emitted] [immutable] [hmr] (name: main)
+asset main.a475de9b4ead6da36a18.hot-update.json 28 bytes [emitted] [immutable] [hmr]
+Entrypoint main 1.61 MiB = bundle.js 1.56 MiB main.a475de9b4ead6da36a18.hot-update.js 50.1 KiB
+cached modules 1.35 MiB [cached] 57 modules
+runtime modules 27.5 KiB 14 modules
+./src/steps/StepDashboard.js 36.5 KiB [built] [code generated]
+webpack 5.99.9 compiled successfully in 141 ms

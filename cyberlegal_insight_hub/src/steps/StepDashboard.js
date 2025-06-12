@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { calculateOverallRisk, getRecommendations } from '../logic/SmartRiskEngine';
+
 import './StepDashboard.css';
 
 /**
@@ -44,6 +45,8 @@ function DemoToast({ message, onClose }) {
     </div>
   );
 }
+import { saveReport } from "../logic/UserReportStore";
+
 // PUBLIC_INTERFACE
 function ScoreCard({ 
   quizScore, 
@@ -331,9 +334,7 @@ function ActionPlan({ actionItems, overallGrade, quizRisk, contractFlags }) {
  * Aggregates and displays quiz and contract analysis results in an interactive tabbed dashboard.
  * Populates actionable content in all result tabs based on user data.
  */
-import { saveReport } from "../logic/UserReportStore";
 
-import { saveReport } from "../logic/UserReportStore";
 
 function StepDashboard({
   goToNextStep,
