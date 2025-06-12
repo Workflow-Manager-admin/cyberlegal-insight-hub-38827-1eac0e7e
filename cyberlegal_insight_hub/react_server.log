@@ -7,66 +7,36 @@
 <i> [webpack-dev-server] On Your Network (IPv4): http://172.17.0.2:3000/
 <i> [webpack-dev-server] Content not from webpack is served from './public' directory
 Injecting EditorRootWrapper import: ../.ve/EditorRootWrapper
-asset bundle.js 1.51 MiB [emitted] (name: main)
+asset bundle.js 1.52 MiB [emitted] (name: main)
 asset index.html 1.92 KiB [emitted]
 runtime modules 27.5 KiB 14 modules
-cacheable modules 1.35 MiB
+cacheable modules 1.36 MiB
   modules by path ./node_modules/ 1.24 MiB 31 modules
-  modules by path ./src/ 102 KiB 19 modules
+  modules by path ./src/ 104 KiB 19 modules
   modules by path ./.ve/ 15.1 KiB
     modules by path ./.ve/*.js 10.6 KiB 2 modules
     modules by path ./.ve/*.css 2.93 KiB
       ./.ve/EditorOverlay.css 2.25 KiB [built] [code generated]
       ./node_modules/css-loader/dist/cjs.js!./.ve/EditorOverlay.css 697 bytes [built] [code generated]
     ./.ve/EditorOverlay.jsx 1.58 KiB [built] [code generated]
-webpack 5.99.9 compiled successfully in 1681 ms
+webpack 5.99.9 compiled successfully in 1730 ms
 assets by status 1.92 KiB [cached] 1 asset
-assets by path *.js 1.55 MiB
+assets by path *.js 1.56 MiB
   asset bundle.js 1.52 MiB [emitted] (name: main)
-  asset main.f6f18c33f54a5a1a0c5f.hot-update.js 33.1 KiB [emitted] [immutable] [hmr] (name: main)
-asset main.f6f18c33f54a5a1a0c5f.hot-update.json 28 bytes [emitted] [immutable] [hmr]
-Entrypoint main 1.55 MiB = bundle.js 1.52 MiB main.f6f18c33f54a5a1a0c5f.hot-update.js 33.1 KiB
+  asset main.8a2f806ead2f641c4f55.hot-update.js 36.7 KiB [emitted] [immutable] [hmr] (name: main)
+asset main.8a2f806ead2f641c4f55.hot-update.json 28 bytes [emitted] [immutable] [hmr]
+Entrypoint main 1.56 MiB = bundle.js 1.52 MiB main.8a2f806ead2f641c4f55.hot-update.js 36.7 KiB
 cached modules 1.33 MiB [cached] 54 modules
 runtime modules 27.5 KiB 14 modules
-./src/steps/StepDashboard.js 24.5 KiB [built] [code generated]
-webpack 5.99.9 compiled successfully in 97 ms
+./src/steps/StepDashboard.js 27.9 KiB [built] [code generated]
+webpack 5.99.9 compiled successfully in 240 ms
 assets by status 1.92 KiB [cached] 1 asset
-assets by path *.js 1.55 MiB
+assets by path *.js 1.56 MiB
   asset bundle.js 1.52 MiB [emitted] (name: main)
-  asset main.a5fd292d404aa56229b6.hot-update.js 33.3 KiB [emitted] [immutable] [hmr] (name: main)
-asset main.a5fd292d404aa56229b6.hot-update.json 28 bytes [emitted] [immutable] [hmr]
-Entrypoint main 1.55 MiB = bundle.js 1.52 MiB main.a5fd292d404aa56229b6.hot-update.js 33.3 KiB
+  asset main.b7a5cebfdc8088beab46.hot-update.js 36.9 KiB [emitted] [immutable] [hmr] (name: main)
+asset main.b7a5cebfdc8088beab46.hot-update.json 28 bytes [emitted] [immutable] [hmr]
+Entrypoint main 1.56 MiB = bundle.js 1.52 MiB main.b7a5cebfdc8088beab46.hot-update.js 36.9 KiB
 cached modules 1.33 MiB [cached] 54 modules
 runtime modules 27.5 KiB 14 modules
-./src/steps/StepDashboard.js 24.7 KiB [built] [code generated]
-webpack 5.99.9 compiled successfully in 79 ms
-assets by status 1.92 KiB [cached] 1 asset
-assets by path *.js 1.55 MiB
-  asset bundle.js 1.52 MiB [emitted] (name: main)
-  asset main.1279fc9d630bf76c518c.hot-update.js 33.5 KiB [emitted] [immutable] [hmr] (name: main)
-asset main.1279fc9d630bf76c518c.hot-update.json 28 bytes [emitted] [immutable] [hmr]
-Entrypoint main 1.55 MiB = bundle.js 1.52 MiB main.1279fc9d630bf76c518c.hot-update.js 33.5 KiB
-cached modules 1.33 MiB [cached] 54 modules
-runtime modules 27.5 KiB 14 modules
-./src/steps/StepDashboard.js 24.9 KiB [built] [code generated]
-webpack 5.99.9 compiled successfully in 77 ms
-assets by status 1.92 KiB [cached] 1 asset
-assets by path *.js 1.55 MiB
-  asset bundle.js 1.52 MiB [emitted] (name: main)
-  asset main.01242bd87a9cc6fe8eeb.hot-update.js 33.7 KiB [emitted] [immutable] [hmr] (name: main)
-asset main.01242bd87a9cc6fe8eeb.hot-update.json 28 bytes [emitted] [immutable] [hmr]
-Entrypoint main 1.55 MiB = bundle.js 1.52 MiB main.01242bd87a9cc6fe8eeb.hot-update.js 33.7 KiB
-cached modules 1.33 MiB [cached] 54 modules
-runtime modules 27.5 KiB 14 modules
-./src/steps/StepDashboard.js 25.1 KiB [built] [code generated]
-webpack 5.99.9 compiled successfully in 98 ms
-assets by status 1.92 KiB [cached] 1 asset
-assets by path *.js 1.52 MiB
-  asset bundle.js 1.52 MiB [emitted] (name: main)
-  asset main.b134152b09e94b4d992b.hot-update.js 8.02 KiB [emitted] [immutable] [hmr] (name: main)
-asset main.b134152b09e94b4d992b.hot-update.json 28 bytes [emitted] [immutable] [hmr]
-Entrypoint main 1.52 MiB = bundle.js 1.52 MiB main.b134152b09e94b4d992b.hot-update.js 8.02 KiB
-cached modules 1.35 MiB [cached] 54 modules
-runtime modules 27.5 KiB 14 modules
-./node_modules/css-loader/dist/cjs.js!./src/steps/StepDashboard.css 5.38 KiB [built] [code generated]
-webpack 5.99.9 compiled successfully in 37 ms
+./src/steps/StepDashboard.js 28 KiB [built] [code generated]
+webpack 5.99.9 compiled successfully in 114 ms
