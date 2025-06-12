@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { calculateOverallRisk, getRecommendations } from '../logic/SmartRiskEngine';
 import { saveReport } from "../logic/UserReportStore";
+import PhishingNewsFeed from "../ui/PhishingNewsFeed";
 
 import './StepDashboard.css';
 
@@ -643,7 +644,7 @@ function StepDashboard({
 
   return (
     <div className="step step-dashboard" style={{
-      display: 'flex', flexDirection: 'column', alignItems: 'center'
+      display: 'flex', flexDirection: 'column', alignItems: 'center', position: 'relative', minHeight: 480
     }}>
       <h2 style={{
         marginTop: 0, marginBottom: 22, fontWeight: 700, letterSpacing: "-0.5px"
@@ -662,6 +663,8 @@ function StepDashboard({
         summary={summary}
         recommendations={recommendations}
       />
+      {/* Real-time phishing/news feed simulation panel */}
+      <PhishingNewsFeed floating={true} intervalMs={5900} />
       <DemoToast message={toastMsg} onClose={() => setToastMsg("")} />
       <div className="dashboard-tabs-nav" role="tablist" aria-label="Dashboard Subsections">
         {TABS.map((t, i) =>
