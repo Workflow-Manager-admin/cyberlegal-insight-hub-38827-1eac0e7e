@@ -7,55 +7,61 @@
 <i> [webpack-dev-server] On Your Network (IPv4): http://172.17.0.2:3000/
 <i> [webpack-dev-server] Content not from webpack is served from './public' directory
 Injecting EditorRootWrapper import: ../.ve/EditorRootWrapper
-asset bundle.js 1.42 MiB [emitted] (name: main)
+asset bundle.js 1.43 MiB [emitted] (name: main)
 asset index.html 1.92 KiB [emitted]
 runtime modules 27.5 KiB 14 modules
-cacheable modules 1.28 MiB
+cacheable modules 1.29 MiB
   modules by path ./node_modules/ 1.24 MiB 31 modules
-  modules by path ./src/ 27.2 KiB
-    modules by path ./src/steps/*.js 5.89 KiB 5 modules
-    modules by path ./src/*.css 12.6 KiB 4 modules
-    modules by path ./src/*.js 2.27 KiB 2 modules
-    modules by path ./src/ui/*.js 3.21 KiB 2 modules
-    + 1 module
+  modules by path ./src/ 36.8 KiB 17 modules
   modules by path ./.ve/ 15.1 KiB
     modules by path ./.ve/*.js 10.6 KiB 2 modules
-    modules by path ./.ve/*.css 2.93 KiB 2 modules
+    modules by path ./.ve/*.css 2.93 KiB
+      ./.ve/EditorOverlay.css 2.25 KiB [built] [code generated]
+      ./node_modules/css-loader/dist/cjs.js!./.ve/EditorOverlay.css 697 bytes [built] [code generated]
     ./.ve/EditorOverlay.jsx 1.58 KiB [built] [code generated]
-webpack 5.99.9 compiled successfully in 1514 ms
+webpack 5.99.9 compiled successfully in 1519 ms
 assets by status 1.92 KiB [cached] 1 asset
-assets by path *.js 1.43 MiB
-  asset bundle.js 1.42 MiB [emitted] (name: main)
-  asset main.1273e6bec27425e14166.hot-update.js 6.33 KiB [emitted] [immutable] [hmr] (name: main)
-asset main.1273e6bec27425e14166.hot-update.json 28 bytes [emitted] [immutable] [hmr]
-Entrypoint main 1.43 MiB = bundle.js 1.42 MiB main.1273e6bec27425e14166.hot-update.js 6.33 KiB
-cached modules 1.28 MiB [cached] 49 modules
+assets by path *.js 1.46 MiB
+  asset bundle.js 1.44 MiB [emitted] (name: main)
+  asset main.5c87c22a96722d909884.hot-update.js 17.9 KiB [emitted] [immutable] [hmr] (name: main)
+asset main.5c87c22a96722d909884.hot-update.json 28 bytes [emitted] [immutable] [hmr]
+Entrypoint main 1.46 MiB = bundle.js 1.44 MiB main.5c87c22a96722d909884.hot-update.js 17.9 KiB
+cached modules 1.29 MiB [cached] 52 modules
 runtime modules 27.5 KiB 14 modules
-javascript modules 3.31 KiB
-  ./src/steps/StepCyberQuiz.js 2.4 KiB [built] [code generated]
-  ./src/logic/QuizEngine.js 931 bytes [built] [code generated]
-webpack 5.99.9 compiled successfully in 60 ms
+./src/steps/StepDashboard.js 12.1 KiB [built] [code generated]
+
+ERROR in ./src/steps/StepDashboard.js 11:0-29
+Module not found: Error: Can't resolve './StepDashboard.css' in '/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/src/steps'
+resolve './StepDashboard.css' in '/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/src/steps'
+  using description file: /home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/package.json (relative path: ./src/steps)
+    Field 'browser' doesn't contain a valid alias configuration
+    using description file: /home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/package.json (relative path: ./src/steps/StepDashboard.css)
+      no extension
+        Field 'browser' doesn't contain a valid alias configuration
+        /home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/src/steps/StepDashboard.css doesn't exist
+      .js
+        Field 'browser' doesn't contain a valid alias configuration
+        /home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/src/steps/StepDashboard.css.js doesn't exist
+      .jsx
+        Field 'browser' doesn't contain a valid alias configuration
+        /home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/src/steps/StepDashboard.css.jsx doesn't exist
+      as directory
+        /home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/src/steps/StepDashboard.css doesn't exist
+ @ ./src/containers/MainContainer.js 21:0-51 39:13-26
+ @ ./src/App.js 3:0-55 50:36-49
+ @ ./src/index.js 5:0-24 11:32-35
+
+webpack 5.99.9 compiled with 1 error in 147 ms
 assets by status 1.92 KiB [cached] 1 asset
-assets by path *.js 1.44 MiB
-  asset bundle.js 1.43 MiB [emitted] (name: main)
-  asset main.accf1b0a8966647beb63.hot-update.js 8.86 KiB [emitted] [immutable] [hmr] (name: main)
-asset main.accf1b0a8966647beb63.hot-update.json 28 bytes [emitted] [immutable] [hmr]
-Entrypoint main 1.44 MiB = bundle.js 1.43 MiB main.accf1b0a8966647beb63.hot-update.js 8.86 KiB
-cached modules 1.28 MiB [cached] 50 modules
+assets by path *.js 1.49 MiB
+  asset bundle.js 1.46 MiB [emitted] (name: main)
+  asset main.0360b26a677a797551ef.hot-update.js 32.3 KiB [emitted] [immutable] [hmr] (name: main)
+asset main.0360b26a677a797551ef.hot-update.json 28 bytes [emitted] [immutable] [hmr]
+Entrypoint main 1.49 MiB = bundle.js 1.46 MiB main.0360b26a677a797551ef.hot-update.js 32.3 KiB
+cached modules 1.29 MiB [cached] 52 modules
 runtime modules 27.5 KiB 14 modules
-javascript modules 5.28 KiB
-  ./src/steps/StepContractUpload.js 3.71 KiB [built] [code generated]
-  ./src/logic/ContractAnalyzer.js 1.58 KiB [built] [code generated]
-webpack 5.99.9 compiled successfully in 77 ms
-assets by status 1.92 KiB [cached] 1 asset
-assets by path *.js 1.44 MiB
-  asset bundle.js 1.43 MiB [emitted] (name: main)
-  asset main.d3f54d845884c7bb933f.hot-update.js 8.53 KiB [emitted] [immutable] [hmr] (name: main)
-asset main.d3f54d845884c7bb933f.hot-update.json 28 bytes [emitted] [immutable] [hmr]
-Entrypoint main 1.44 MiB = bundle.js 1.43 MiB main.d3f54d845884c7bb933f.hot-update.js 8.53 KiB
-cached modules 1.29 MiB [cached] 51 modules
-runtime modules 27.5 KiB 14 modules
-javascript modules 4.92 KiB
-  ./src/steps/StepDashboard.js 3.17 KiB [built] [code generated]
-  ./src/logic/SmartRiskEngine.js 1.75 KiB [built] [code generated]
-webpack 5.99.9 compiled successfully in 77 ms
+javascript modules 19.4 KiB
+  ./src/steps/StepDashboard.js 12.1 KiB [code generated]
+  ./src/steps/StepDashboard.css 2.28 KiB [built] [code generated]
+  ./node_modules/css-loader/dist/cjs.js!./src/steps/StepDashboard.css 4.97 KiB [built] [code generated]
+webpack 5.99.9 compiled successfully in 80 ms
