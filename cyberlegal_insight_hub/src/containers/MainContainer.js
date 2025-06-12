@@ -76,12 +76,28 @@ function MainContainer() {
       )}
       {/* Step content */}
       <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+        {/* For Dashboard, supply full quiz + contract state. Other steps receive standard props. */}
         <StepComponent
           appData={appData}
           setAppData={setAppData}
           goToNextStep={goToNextStep}
           goToPrevStep={goToPrevStep}
           currentStep={currentStep}
+          // Pass quiz/contract details for deep insights to Dashboard
+          {...(StepComponent === steps[3].component
+            ? {
+                // Quiz details
+                quizScore: appData.quizScore,
+                quizRisk: appData.quizRisk,
+                quizResults: appData.quizResults,
+                // Contract details
+                contractRisk: appData.contractRisk,
+                contractFlags: appData.contractFlags,
+                contractRecs: appData.contractRecs,
+                // Whether the user actually submitted/uploaded/pasted a contract
+                contractUploaded: appData.contractUploaded
+              }
+            : {})}
         />
       </div>
     </div>

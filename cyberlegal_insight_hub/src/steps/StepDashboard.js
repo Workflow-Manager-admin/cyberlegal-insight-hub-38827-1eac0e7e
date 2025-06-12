@@ -130,15 +130,60 @@ function ActionPlan({ actionItems }) {
   );
 }
 
-// MAIN DASHBOARD COMPONENT
-// PUBLIC_INTERFACE
-function StepDashboard({ goToNextStep, goToPrevStep, appData }) {
-  // Data flow via props (fall back to demo for stand-alone debugging)
-  const quizScore = appData?.quizScore ?? 78;
-  const contractRisk = appData?.contractRisk ?? 63;
-  const summary = calculateOverallRisk({ quizScore, contractRisk });
+/*
+ * MAIN DASHBOARD COMPONENT
+ * PUBLIC_INTERFACE
+ * Now aggregates and displays quiz and contract analysis results in an interactive tabbed dashboard.
+ */
+function StepDashboard({
+  goToNextStep,
+  goToPrevStep,
+  appData,
+  // Also accept quiz/contract values via props for flexibility
+  quizScore,
+  quizRisk,
+  quizResults,
+  contractRisk,
+  contractFlags,
+  contractRecs,
+  contractUploaded
+}) {
+  // Data flow: prefer explicit state from props, else fallback to appData, else demo values
+  const mergedQuizScore =
+    quizScore ??
+    appData?.quizScore ??
+    78;
+  const mergedContractRisk =
+    contractRisk ??
+    appData?.contractRisk ??
+    63;
+
+  const mergedQuizRisk =
+    quizRisk ??
+    appData?.quizRisk ??
+    "-";
+  const mergedQuizResults =
+    quizResults ??
+    appData?.quizResults ??
+    undefined;
+
+  const mergedContractFlags =
+    contractFlags ??
+    appData?.contractFlags ??
+    [];
+  const mergedContractRecs =
+    contractRecs ??
+    appData?.contractRecs ??
+    [];
+
+  // Core overall risk
+  const summary = calculateOverallRisk({
+    quizScore: mergedQuizScore,
+    contractRisk: mergedContractRisk
+  });
   const recommendations = getRecommendations(summary.riskGrade);
 
+  // Prepare combined insights for display in tabs
   const checklist = [
     ...recommendations.map(r => r.replace(/[.!?]$/, '')),
     "Update passwords across key accounts",
@@ -151,12 +196,120 @@ function StepDashboard({ goToNextStep, goToPrevStep, appData }) {
     "Retake quiz in 90 days"
   ];
 
-  // Tabbed navigation (Summary, Tips, Checklist, Action Plan)
+  // Enhanced: Prepare insights for all tabs
+  const quizInsight = mergedQuizResults && Array.isArray(mergedQuizResults)
+    ? (
+        <div>
+          <h4 style={{marginTop:0,marginBottom:7}}>Quiz Insights</h4>
+          <ul>
+            {mergedQuizResults.map((res, idx) => (
+              <li key={res.questionId || idx}>
+                <span style={{fontWeight: 600, color: res.isCorrect ? "#178f42" : "#b82727"}}>
+                  {res.isCorrect ? "✔️" : "❌"}
+                </span>
+                &nbsp;
+                <span style={{color:"#213", fontWeight:500}}>
+                  {`Q${idx+1}`}
+                </span>
+                {typeof res.userAnswer === "number"
+                  ? ` : ${res.isCorrect?"Correct":"Incorrect"}`
+                  : ""}
+              </li>
+            ))}
+          </ul>
+          <div style={{marginTop:5, fontSize:14.5, color:'#678'}}>
+            <b>Quiz Risk Level:</b> {mergedQuizRisk}
+          </div>
+        </div>
+      )
+    : (
+        <div>
+          <h4 style={{marginTop:0}}>Quiz Insights</h4>
+          <div>No answer details available.</div>
+        </div>
+      );
+
+  const contractFindings = contractUploaded === false
+    ? (
+      <div>
+        <h4 style={{marginTop:0}}>Contract Findings</h4>
+        <div>No contract was uploaded for analysis.</div>
+      </div>
+    )
+    : (
+      <div>
+        <h4 style={{marginTop:0,marginBottom:6}}>Contract Analysis</h4>
+        <div><b>Red Flags:</b>
+          <ul style={{marginBottom:2,paddingLeft:18}}>
+            {(mergedContractFlags || []).length
+              ? mergedContractFlags.map((flag, idx) => <li key={idx}>{flag}</li>)
+              : <li>None found</li>
+            }
+          </ul>
+        </div>
+        <div><b>Recommendations:</b>
+          <ul style={{marginBottom:2,paddingLeft:18}}>
+            {(mergedContractRecs || []).length
+              ? mergedContractRecs.map((rec, idx) => <li key={idx}>{rec}</li>)
+              : <li>No recommendations provided.</li>
+            }
+          </ul>
+        </div>
+      </div>
+    );
+
+  // Tab definition for richer tab experience
   const TABS = [
-    { label: "Summary", icon: "📊" },
-    { label: "Tips", icon: "💡" },
-    { label: "Checklist", icon: "☑️" },
-    { label: "Action Plan", icon: "🚀" }
+    {
+      label: "Summary",
+      icon: "📊",
+      content: (
+        <div>
+          <div className="glass-card dashboard-panel-card">
+            <div>
+              <b>Quiz Score:</b> {mergedQuizScore} / 100{" "}
+              <span style={{ color: "#2563eb", marginLeft: 5, fontWeight: 600 }}>
+                {mergedQuizRisk}
+              </span>
+            </div>
+            <div>
+              <b>Contract Safety Score:</b> {mergedContractRisk} / 100
+            </div>
+            <div style={{ fontSize: 18, margin: '10px 0 7px 0' }}>
+              <b>Overall:</b> {summary.riskScore} / 100{" "}
+              <span style={{ fontWeight: 600 }}>{summary.riskGrade}</span>
+            </div>
+            {quizInsight}
+            <div style={{margin:"11px 0"}}>{contractFindings}</div>
+          </div>
+        </div>
+      )
+    },
+    {
+      label: "Quiz Insights",
+      icon: "🧩",
+      content: (<div className="glass-card dashboard-panel-card">{quizInsight}</div>)
+    },
+    {
+      label: "Contract Findings",
+      icon: "📑",
+      content: (<div className="glass-card dashboard-panel-card">{contractFindings}</div>)
+    },
+    {
+      label: "Tips",
+      icon: "💡",
+      content: <TipsTab recommendations={recommendations} />
+    },
+    {
+      label: "Checklist",
+      icon: "☑️",
+      content: <Checklist items={checklist} />
+    },
+    {
+      label: "Action Plan",
+      icon: "🚀",
+      content: <ActionPlan actionItems={actionPlan} />
+    }
   ];
   const [tab, setTab] = useState(0);
 
@@ -175,8 +328,8 @@ function StepDashboard({ goToNextStep, goToPrevStep, appData }) {
         Risk Assessment Results
       </h2>
       <ScoreCard
-        quizScore={quizScore}
-        contractRisk={contractRisk}
+        quizScore={mergedQuizScore}
+        contractRisk={mergedContractRisk}
         overallScore={summary.riskScore}
         overallGrade={summary.riskGrade}
       />
@@ -191,7 +344,7 @@ function StepDashboard({ goToNextStep, goToPrevStep, appData }) {
             aria-selected={tab === i}
             tabIndex={tab === i ? 0 : -1}
             role="tab"
-            style={{ transitionDelay: `${i * 40}ms` }}
+            style={{ transitionDelay: `${i * 31}ms` }}
           >
             <span style={{ fontSize: 22, marginRight: 5 }}>{t.icon}</span> {t.label}
           </button>
@@ -200,24 +353,7 @@ function StepDashboard({ goToNextStep, goToPrevStep, appData }) {
 
       {/* Animated content panel for tab */}
       <div className="dashboard-tabs-panel anim-fadein" key={tabKey}>
-        {tab === 0 && (
-          <div>
-            <div className="glass-card dashboard-panel-card">
-              <div>
-                <b>Quiz Score:</b> {quizScore} / 100
-              </div>
-              <div>
-                <b>Contract Safety Score:</b> {contractRisk} / 100
-              </div>
-              <div style={{ fontSize: 18, margin: '9px 0' }}>
-                <b>Overall:</b> {summary.riskScore} / 100 <span style={{ fontWeight: 600 }}>{summary.riskGrade}</span>
-              </div>
-            </div>
-          </div>
-        )}
-        {tab === 1 && <TipsTab recommendations={recommendations} />}
-        {tab === 2 && <Checklist items={checklist} />}
-        {tab === 3 && <ActionPlan actionItems={actionPlan} />}
+        {TABS[tab].content}
       </div>
 
       {/* Footer navigation buttons */}
