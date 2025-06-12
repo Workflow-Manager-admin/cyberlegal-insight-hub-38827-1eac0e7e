@@ -398,33 +398,155 @@ function StepDashboard({
     "Retake quiz in 90 days"
   ];
 
-  // Show granular quiz results in tab
-  const quizInsight = mergedQuizResults && Array.isArray(mergedQuizResults)
-    ? (
+  // --- Quiz insights with detailed per-question feedback ---
+  // We'll use the quiz questions (with explanations) for insights display.
+  let QUIZ_QUESTIONS = undefined;
+  try {
+    // Dynamically require or import the quiz questions.
+    // We'll use a dummy-local import like below (if available).
+    QUIZ_QUESTIONS = require('../steps/StepCyberQuiz').default?.QUIZ_QUESTIONS ||
+                     require('../steps/StepCyberQuiz').QUIZ_QUESTIONS ||
+                     undefined;
+  } catch (e) {
+    // fallback: we'll redeclare here if bundler blocks require()
+    QUIZ_QUESTIONS = [
+      {
+        id: 'q1',
+        question: "You receive an email from your 'bank' asking to click a link and verify your account. What should you do?",
+        options: [
+          "Click the link and enter your credentials immediately.",
+          "Delete the email without responding.",
+          "Verify the sender's email, contact the bank directly, and avoid clicking suspicious links.",
+          "Forward the email to friends as a precaution.",
+        ],
+        correct: 2,
+        explanation:
+          "Never click on email links from unknown or suspicious senders. Always independently verify such requests by contacting the bank using official contact info. This prevents phishing attacks."
+      },
+      {
+        id: 'q2',
+        question: "What is the MOST secure way to store your work passwords?",
+        options: [
+          "Write them in a notebook you keep in your desk drawer.",
+          "Save them in a secure, encrypted password manager.",
+          "Email them to yourself so you don't forget.",
+          "Reuse the same simple password everywhere for convenience.",
+        ],
+        correct: 1,
+        explanation:
+          "Use a reputable password manager to create and store unique, complex passwords for all your accounts. Never reuse passwords or write them down in insecure locations."
+      },
+      {
+        id: 'q3',
+        question: "A colleague asks for access to confidential files. The request comes via text message. What should you do?",
+        options: [
+          "Share the files, since you know the colleague.",
+          "Ignore the request.",
+          "Call or verify the request through an official company channel, and follow your organization's data policy.",
+          "Send the files only after your manager approves in writing.",
+        ],
+        correct: 2,
+        explanation:
+          "Always verify sensitive requests using official, secure channels—even if the requester is familiar. This prevents social engineering and potential data leaks."
+      },
+      {
+        id: 'q4',
+        question: "Which of these is a sign of a potentially unsafe website?",
+        options: [
+          "The web address starts with 'https://' and shows a padlock.",
+          "The site asks for personal data and has spelling errors, odd pop-ups, or mismatched URL.",
+          "It loads very quickly and has a modern design.",
+          "There is a privacy policy linked at the bottom.",
+        ],
+        correct: 1,
+        explanation:
+          "Watch for spelling mistakes, unexpected data requests, mismatched URLs, and aggressive pop-ups—these may signal a phishing site. Always check for 'https://' but that's not a sole guarantee."
+      },
+      {
+        id: 'q5',
+        question: "Which of the following is LEGALLY acceptable digital behavior at work?",
+        options: [
+          "Sharing copyrighted media via company email to colleagues.",
+          "Using only licensed and approved software for business purposes.",
+          "Downloading torrents on the company network for convenience.",
+          "Forwarding sensitive customer data to your personal email for work-from-home.",
+        ],
+        correct: 1,
+        explanation:
+          "Use only authorized, licensed software for business; unauthorized sharing of media or data can expose you and your employer to legal risk. Never send confidential data to personal accounts."
+      },
+    ];
+  }
+
+  // Now, generate detailed insight items for each answered quiz question:
+  const quizInsight =
+    mergedQuizResults && Array.isArray(mergedQuizResults) && QUIZ_QUESTIONS
+      ? (
         <div>
           <h4 style={{marginTop:0,marginBottom:7}}>Quiz Insights</h4>
-          <ul>
-            {mergedQuizResults.map((res, idx) => (
-              <li key={res.questionId || idx}>
-                <span style={{fontWeight: 600, color: res.isCorrect ? "#178f42" : "#b82727"}}>
-                  {res.isCorrect ? "✔️" : "❌"}
-                </span>
-                &nbsp;
-                <span style={{color:"#213", fontWeight:500}}>
-                  {`Q${idx+1}`}
-                </span>
-                {typeof res.userAnswer === "number"
-                  ? ` : ${res.isCorrect?"Correct":"Incorrect"}`
-                  : ""}
-              </li>
-            ))}
+          <ul style={{paddingLeft: 0, listStyle: "none"}}>
+            {mergedQuizResults.map((res, idx) => {
+              const q = QUIZ_QUESTIONS.find(q => q.id === res.questionId) || QUIZ_QUESTIONS[idx] || {};
+              const userAnswerIdx = (typeof res.userAnswer === "number") ? res.userAnswer : null;
+              const userAnswerText = (userAnswerIdx !== null && Array.isArray(q.options) && q.options[userAnswerIdx])
+                ? q.options[userAnswerIdx]
+                : (userAnswerIdx === null ? "(no answer)" : "Unknown answer");
+              const correctAnswerText = q.options && q.options[q.correct];
+              return (
+                <li key={res.questionId || idx} style={{
+                  marginBottom:18,
+                  borderLeft: res.isCorrect ? "4px solid #178f42" : "4px solid #b82727",
+                  background: res.isCorrect ? "rgba(23,210,66,0.09)" : "rgba(184,39,39,0.08)",
+                  borderRadius: 6,
+                  padding: "10px 13px",
+                  boxShadow: "0 1px 7px #2563eb09"
+                }}>
+                  <div style={{display:"flex",alignItems:"center",marginBottom:2}}>
+                    <span style={{fontWeight: 700, fontSize:19, marginRight:10, color: res.isCorrect ? "#178f42" : "#b82727"}}>
+                      {res.isCorrect ? "✔️" : "❌"}
+                    </span>
+                    <span style={{fontWeight:600, color:"#213", fontSize:15.7}}>Q{idx+1}:</span>
+                    <span style={{fontWeight:600, color:"#234", marginLeft:4, fontSize:15.7}}>{q.question}</span>
+                  </div>
+                  <div style={{
+                      marginTop:4,
+                      marginBottom:3,
+                      fontSize:14.3,
+                      fontWeight:500,
+                      color: res.isCorrect ? "#178f42" : "#b82727"
+                  }}>
+                    Your answer: <span style={{fontWeight:700}}>{userAnswerText}</span>
+                  </div>
+                  {!res.isCorrect && correctAnswerText && (
+                    <div style={{
+                      marginTop:0,
+                      fontSize:13.7,
+                      color:"#2563eb"
+                    }}>
+                      Correct answer: <span style={{fontWeight:600}}>{correctAnswerText}</span>
+                    </div>
+                  )}
+                  <div style={{
+                    marginTop:7,
+                    fontSize:13.9,
+                    color:"#476",
+                    borderLeft: "3px solid #fbbf24",
+                    paddingLeft: 9,
+                    background:"rgba(251,191,36,0.07)",
+                    borderRadius: 4,
+                  }}>
+                    <b>Tip:</b> {q.explanation}
+                  </div>
+                </li>
+              );
+            })}
           </ul>
           <div style={{marginTop:5, fontSize:14.5, color:'#678'}}>
             <b>Quiz Risk Level:</b> {mergedQuizRisk}
           </div>
         </div>
       )
-    : (
+      : (
         <div>
           <h4 style={{marginTop:0}}>Quiz Insights</h4>
           <div>No answer details available.</div>

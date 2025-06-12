@@ -12,31 +12,21 @@ asset index.html 1.92 KiB [emitted]
 runtime modules 27.5 KiB 14 modules
 cacheable modules 1.36 MiB
   modules by path ./node_modules/ 1.24 MiB 31 modules
-  modules by path ./src/ 104 KiB 19 modules
+  modules by path ./src/ 107 KiB 19 modules
   modules by path ./.ve/ 15.1 KiB
     modules by path ./.ve/*.js 10.6 KiB 2 modules
     modules by path ./.ve/*.css 2.93 KiB
       ./.ve/EditorOverlay.css 2.25 KiB [built] [code generated]
       ./node_modules/css-loader/dist/cjs.js!./.ve/EditorOverlay.css 697 bytes [built] [code generated]
     ./.ve/EditorOverlay.jsx 1.58 KiB [built] [code generated]
-webpack 5.99.9 compiled successfully in 1730 ms
+webpack 5.99.9 compiled successfully in 1704 ms
 assets by status 1.92 KiB [cached] 1 asset
-assets by path *.js 1.56 MiB
-  asset bundle.js 1.52 MiB [emitted] (name: main)
-  asset main.8a2f806ead2f641c4f55.hot-update.js 36.7 KiB [emitted] [immutable] [hmr] (name: main)
-asset main.8a2f806ead2f641c4f55.hot-update.json 28 bytes [emitted] [immutable] [hmr]
-Entrypoint main 1.56 MiB = bundle.js 1.52 MiB main.8a2f806ead2f641c4f55.hot-update.js 36.7 KiB
+assets by path *.js 1.57 MiB
+  asset bundle.js 1.53 MiB [emitted] (name: main)
+  asset main.3f580f6a600ac45ae97a.hot-update.js 44.3 KiB [emitted] [immutable] [hmr] (name: main)
+asset main.3f580f6a600ac45ae97a.hot-update.json 28 bytes [emitted] [immutable] [hmr]
+Entrypoint main 1.57 MiB = bundle.js 1.53 MiB main.3f580f6a600ac45ae97a.hot-update.js 44.3 KiB
 cached modules 1.33 MiB [cached] 54 modules
 runtime modules 27.5 KiB 14 modules
-./src/steps/StepDashboard.js 27.9 KiB [built] [code generated]
-webpack 5.99.9 compiled successfully in 240 ms
-assets by status 1.92 KiB [cached] 1 asset
-assets by path *.js 1.56 MiB
-  asset bundle.js 1.52 MiB [emitted] (name: main)
-  asset main.b7a5cebfdc8088beab46.hot-update.js 36.9 KiB [emitted] [immutable] [hmr] (name: main)
-asset main.b7a5cebfdc8088beab46.hot-update.json 28 bytes [emitted] [immutable] [hmr]
-Entrypoint main 1.56 MiB = bundle.js 1.52 MiB main.b7a5cebfdc8088beab46.hot-update.js 36.9 KiB
-cached modules 1.33 MiB [cached] 54 modules
-runtime modules 27.5 KiB 14 modules
-./src/steps/StepDashboard.js 28 KiB [built] [code generated]
-webpack 5.99.9 compiled successfully in 114 ms
+./src/steps/StepDashboard.js 34.8 KiB [built] [code generated]
+webpack 5.99.9 compiled successfully in 258 ms
