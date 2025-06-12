@@ -7,145 +7,48 @@
 <i> [webpack-dev-server] On Your Network (IPv4): http://172.17.0.2:3000/
 <i> [webpack-dev-server] Content not from webpack is served from './public' directory
 Injecting EditorRootWrapper import: ../.ve/EditorRootWrapper
-asset bundle.js 1.58 MiB [emitted] (name: main)
+asset bundle.js 1.6 MiB [emitted] (name: main)
 asset index.html 1.92 KiB [emitted]
 runtime modules 27.5 KiB 14 modules
-cacheable modules 1.4 MiB
+cacheable modules 1.42 MiB
   modules by path ./node_modules/ 1.24 MiB 31 modules
-  modules by path ./src/ 153 KiB 23 modules
+  modules by path ./src/ 175 KiB 24 modules
   modules by path ./.ve/ 15.1 KiB
     modules by path ./.ve/*.js 10.6 KiB 2 modules
     modules by path ./.ve/*.css 2.93 KiB
       ./.ve/EditorOverlay.css 2.25 KiB [built] [code generated]
       ./node_modules/css-loader/dist/cjs.js!./.ve/EditorOverlay.css 697 bytes [built] [code generated]
     ./.ve/EditorOverlay.jsx 1.58 KiB [built] [code generated]
-webpack 5.99.9 compiled successfully in 1776 ms
+webpack 5.99.9 compiled successfully in 1845 ms
 assets by status 1.92 KiB [cached] 1 asset
-assets by path *.js 1.63 MiB
-  asset bundle.js 1.59 MiB [emitted] (name: main)
-  asset main.222534a3f6e5871fdb6e.hot-update.js 38.4 KiB [emitted] [immutable] [hmr] (name: main)
-asset main.222534a3f6e5871fdb6e.hot-update.json 28 bytes [emitted] [immutable] [hmr]
-Entrypoint main 1.63 MiB = bundle.js 1.59 MiB main.222534a3f6e5871fdb6e.hot-update.js 38.4 KiB
-cached modules 1.39 MiB [cached] 58 modules
-runtime modules 27.5 KiB 14 modules
-javascript modules 30.1 KiB
-  ./src/ui/ReportHistoryModal.js 16.3 KiB [built] [code generated]
-  ./src/ui/HistoryTimeline.js 13.7 KiB [built] [code generated]
-webpack 5.99.9 compiled successfully in 255 ms
-assets by status 1.92 KiB [cached] 1 asset
-assets by path *.js 1.61 MiB
-  asset bundle.js 1.59 MiB [emitted] (name: main)
-  asset main.a9911efbb05ce4b5773c.hot-update.js 21.4 KiB [emitted] [immutable] [hmr] (name: main)
-asset main.a9911efbb05ce4b5773c.hot-update.json 28 bytes [emitted] [immutable] [hmr]
-Entrypoint main 1.61 MiB = bundle.js 1.59 MiB main.a9911efbb05ce4b5773c.hot-update.js 21.4 KiB
+assets by path *.js 1.66 MiB
+  asset bundle.js 1.62 MiB [emitted] (name: main)
+  asset main.d1e72d95c1e5e5b55879.hot-update.js 47.3 KiB [emitted] [immutable] [hmr] (name: main)
+asset main.d1e72d95c1e5e5b55879.hot-update.json 28 bytes [emitted] [immutable] [hmr]
+Entrypoint main 1.66 MiB = bundle.js 1.62 MiB main.d1e72d95c1e5e5b55879.hot-update.js 47.3 KiB
 cached modules 1.4 MiB [cached] 59 modules
 runtime modules 27.5 KiB 14 modules
-./src/ui/ReportHistoryModal.js 16.4 KiB [built] [code generated]
-webpack 5.99.9 compiled successfully in 96 ms
-assets by status 1.92 KiB [cached] 1 asset
-assets by path *.js 1.62 MiB
-  asset bundle.js 1.59 MiB [emitted] (name: main)
-  asset main.8394ec1575d6cfb19268.hot-update.js 22.1 KiB [emitted] [immutable] [hmr] (name: main)
-asset main.8394ec1575d6cfb19268.hot-update.json 28 bytes [emitted] [immutable] [hmr]
-Entrypoint main 1.62 MiB = bundle.js 1.59 MiB main.8394ec1575d6cfb19268.hot-update.js 22.1 KiB
-cached modules 1.4 MiB [cached] 59 modules
-runtime modules 27.5 KiB 14 modules
-./src/ui/ReportHistoryModal.js 17 KiB [built] [code generated]
-webpack 5.99.9 compiled successfully in 77 ms
-assets by status 1.92 KiB [cached] 1 asset
-assets by path *.js 1.62 MiB
-  asset bundle.js 1.59 MiB [emitted] (name: main)
-  asset main.8ebb13486d1c430bb0ca.hot-update.js 22.7 KiB [emitted] [immutable] [hmr] (name: main)
-asset main.8ebb13486d1c430bb0ca.hot-update.json 28 bytes [emitted] [immutable] [hmr]
-Entrypoint main 1.62 MiB = bundle.js 1.59 MiB main.8ebb13486d1c430bb0ca.hot-update.js 22.7 KiB
-cached modules 1.4 MiB [cached] 59 modules
-runtime modules 27.5 KiB 14 modules
-./src/ui/ReportHistoryModal.js 17.4 KiB [built] [code generated]
-webpack 5.99.9 compiled successfully in 77 ms
-assets by status 1.92 KiB [cached] 1 asset
-assets by path *.js 1.63 MiB
-  asset bundle.js 1.6 MiB [emitted] (name: main)
-  asset main.ad127d2d3f89a378a062.hot-update.js 31.6 KiB [emitted] [immutable] [hmr] (name: main)
-asset main.ad127d2d3f89a378a062.hot-update.json 28 bytes [emitted] [immutable] [hmr]
-Entrypoint main 1.63 MiB = bundle.js 1.6 MiB main.ad127d2d3f89a378a062.hot-update.js 31.6 KiB
-cached modules 1.4 MiB [cached] 59 modules
-runtime modules 27.5 KiB 14 modules
-./src/ui/ReportHistoryModal.js 24.5 KiB [built] [code generated]
-webpack 5.99.9 compiled successfully in 92 ms
-assets by status 1.92 KiB [cached] 1 asset
-assets by path *.js 1.57 MiB
-  asset bundle.js 1.56 MiB [emitted] (name: main)
-  asset main.99d83fafe023bba30934.hot-update.js 8.42 KiB [emitted] [immutable] [hmr] (name: main)
-asset main.99d83fafe023bba30934.hot-update.json 57 bytes [emitted] [immutable] [hmr]
-Entrypoint main 1.57 MiB = bundle.js 1.56 MiB main.99d83fafe023bba30934.hot-update.js 8.42 KiB
-cached modules 1.38 MiB [cached] 57 modules
-runtime modules 27.5 KiB 14 modules
-javascript modules 7.71 KiB
-  ./src/App.js 7.67 KiB [code generated]
-  ./src/ui/ReportHistoryModal.js 39 bytes [built] [code generated] [1 error]
-
-ERROR in ./src/ui/ReportHistoryModal.js
-Module build failed (from ./node_modules/babel-loader/lib/index.js):
-SyntaxError: /home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/src/ui/ReportHistoryModal.js: Unexpected token, expected "," (19:0)
-
-  17 |  /* NOTE: No reference to PUBLIC_URL should exist in this file directly. This is a guard dummy import/fix for the ReferenceError. */
-  18 | u/* NOTE: No reference to PUBLIC_URL should exist in this file directly. This is a guard dummy import/fix for the ReferenceError. */
-> 19 | s/* NOTE: No reference to PUBLIC_URL should exist in this file directly. This is a guard dummy import/fix for the ReferenceError. */
-     | ^
-  20 | e/* NOTE: No reference to PUBLIC_URL should exist in this file directly. This is a guard dummy import/fix for the ReferenceError. */
-  21 | E/* NOTE: No reference to PUBLIC_URL should exist in this file directly. This is a guard dummy import/fix for the ReferenceError. */
-  22 | f/* NOTE: No reference to PUBLIC_URL should exist in this file directly. This is a guard dummy import/fix for the ReferenceError. */
-    at constructor (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/parser/lib/index.js:363:19)
-    at JSXParserMixin.raise (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/parser/lib/index.js:6609:19)
-    at JSXParserMixin.unexpected (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/parser/lib/index.js:6629:16)
-    at JSXParserMixin.expect (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/parser/lib/index.js:6910:12)
-    at JSXParserMixin.parseObjectLike (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/parser/lib/index.js:11755:14)
-    at JSXParserMixin.parseExprAtom (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/parser/lib/index.js:11270:23)
-    at JSXParserMixin.parseExprAtom (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/parser/lib/index.js:4776:20)
-    at JSXParserMixin.parseExprSubscripts (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/parser/lib/index.js:11012:23)
-    at JSXParserMixin.parseUpdate (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/parser/lib/index.js:10997:21)
-    at JSXParserMixin.parseMaybeUnary (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/parser/lib/index.js:10977:23)
-    at JSXParserMixin.parseMaybeUnaryOrPrivate (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/parser/lib/index.js:10830:61)
-    at JSXParserMixin.parseExprOps (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/parser/lib/index.js:10835:23)
-    at JSXParserMixin.parseMaybeConditional (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/parser/lib/index.js:10812:23)
-    at JSXParserMixin.parseMaybeAssign (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/parser/lib/index.js:10765:21)
-    at JSXParserMixin.parseExpressionBase (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/parser/lib/index.js:10723:36)
-    at /home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/parser/lib/index.js:10714:39
-    at JSXParserMixin.allowInAnd (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/parser/lib/index.js:12356:16)
-    at JSXParserMixin.parseExpression (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/parser/lib/index.js:10714:17)
-    at JSXParserMixin.parseStatementContent (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/parser/lib/index.js:12814:23)
-    at JSXParserMixin.parseStatementLike (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/parser/lib/index.js:12685:17)
-    at JSXParserMixin.parseModuleItem (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/parser/lib/index.js:12662:17)
-    at JSXParserMixin.parseBlockOrModuleBlockBody (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/parser/lib/index.js:13235:36)
-    at JSXParserMixin.parseBlockBody (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/parser/lib/index.js:13228:10)
-    at JSXParserMixin.parseProgram (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/parser/lib/index.js:12541:10)
-    at JSXParserMixin.parseTopLevel (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/parser/lib/index.js:12531:25)
-    at JSXParserMixin.parse (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/parser/lib/index.js:14410:10)
-    at parse (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/parser/lib/index.js:14444:38)
-    at parser (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/core/lib/parser/index.js:41:34)
-    at parser.next (<anonymous>)
-    at normalizeFile (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/core/lib/transformation/normalize-file.js:64:37)
-    at normalizeFile.next (<anonymous>)
-    at run (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/core/lib/transformation/index.js:22:50)
-    at run.next (<anonymous>)
-    at transform (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/core/lib/transform.js:22:33)
-    at transform.next (<anonymous>)
-    at step (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/gensync/index.js:261:32)
-    at /home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/gensync/index.js:273:13
-    at async.call.result.err.err (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/gensync/index.js:223:11)
- @ ./src/App.js 7:0-57 197:26-44
- @ ./src/index.js 5:0-24 11:32-35
-
-webpack 5.99.9 compiled with 1 error in 53 ms
+javascript modules 36.9 KiB
+  ./src/ui/ReportHistoryModal.js 24.6 KiB [built] [code generated]
+  ./src/ui/TimelineComponent.js 12.3 KiB [built] [code generated]
+webpack 5.99.9 compiled successfully in 271 ms
 assets by status 1.92 KiB [cached] 1 asset
 assets by path *.js 1.65 MiB
-  asset bundle.js 1.6 MiB [emitted] (name: main)
-  asset main.cde25452d6ce37116c01.hot-update.js 48.6 KiB [emitted] [immutable] [hmr] (name: main)
-asset main.cde25452d6ce37116c01.hot-update.json 28 bytes [emitted] [immutable] [hmr]
-Entrypoint main 1.65 MiB = bundle.js 1.6 MiB main.cde25452d6ce37116c01.hot-update.js 48.6 KiB
-cached modules 1.39 MiB [cached] 58 modules
+  asset bundle.js 1.62 MiB [emitted] (name: main)
+  asset main.78c97afcf5ac24ac64d6.hot-update.js 32 KiB [emitted] [immutable] [hmr] (name: main)
+asset main.78c97afcf5ac24ac64d6.hot-update.json 28 bytes [emitted] [immutable] [hmr]
+Entrypoint main 1.65 MiB = bundle.js 1.62 MiB main.78c97afcf5ac24ac64d6.hot-update.js 32 KiB
+cached modules 1.41 MiB [cached] 60 modules
 runtime modules 27.5 KiB 14 modules
-javascript modules 32.2 KiB
-  ./src/App.js 7.67 KiB [code generated]
-  ./src/ui/ReportHistoryModal.js 24.5 KiB [built] [code generated]
-webpack 5.99.9 compiled successfully in 176 ms
+./src/ui/ReportHistoryModal.js 24.8 KiB [built] [code generated]
+webpack 5.99.9 compiled successfully in 119 ms
+assets by status 1.92 KiB [cached] 1 asset
+assets by path *.js 1.63 MiB
+  asset bundle.js 1.62 MiB [emitted] (name: main)
+  asset main.d3cac06f4274112c52c3.hot-update.js 16.6 KiB [emitted] [immutable] [hmr] (name: main)
+asset main.d3cac06f4274112c52c3.hot-update.json 28 bytes [emitted] [immutable] [hmr]
+Entrypoint main 1.63 MiB = bundle.js 1.62 MiB main.d3cac06f4274112c52c3.hot-update.js 16.6 KiB
+cached modules 1.43 MiB [cached] 60 modules
+runtime modules 27.5 KiB 14 modules
+./src/ui/TimelineComponent.js 12.5 KiB [built] [code generated]
+webpack 5.99.9 compiled successfully in 68 ms

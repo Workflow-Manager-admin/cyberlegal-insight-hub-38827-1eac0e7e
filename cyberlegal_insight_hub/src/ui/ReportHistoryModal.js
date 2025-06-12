@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { getReports, getReportById } from "../logic/UserReportStore";
 import HistoryTimeline from "./HistoryTimeline";
+import TimelineComponent from "./TimelineComponent";
 
 /**
  * PUBLIC_INTERFACE
@@ -232,6 +233,12 @@ function ReportHistoryModal({ isOpen, onClose, user }) {
           reports={reports}
           onCompare={setCompareIds}
           defaultCompareIds={compareIds}
+        />
+        {/* NEW: Custom TimelineComponent demo (distinct glassmorphism/neumorphism) */}
+        <TimelineComponent
+          reports={reports}
+          onCompare={setCompareIds}
+          defaultSelected={compareIds}
         />
         {compareIds.length === 2 && (
           <ReportComparisonPanel
