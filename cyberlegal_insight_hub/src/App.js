@@ -4,6 +4,7 @@ import MainContainer from './containers/MainContainer';
 import ThemeToggle from './ui/ThemeToggle';
 import CyberLegalLogo from './ui/CyberLegalLogo';
 import AuthenticationModal from './ui/AuthenticationModal';
+import ReportHistoryModal from './ui/ReportHistoryModal';
 
 /**
  * App.js
@@ -21,6 +22,7 @@ function App() {
     }
   });
   const [isAuthModalOpen, setAuthModalOpen] = React.useState(false);
+  const [isHistoryOpen, setHistoryOpen] = React.useState(false);
 
   // Handle authentication from modal or subcomponents
   function handleAuthenticated(authUser) {
@@ -32,6 +34,7 @@ function App() {
     setUser(null);
     window.localStorage.removeItem('cyberlegalUser');
     setAuthModalOpen(false);
+    setHistoryOpen(false);
   }
 
   // Pass user, handleAuthenticated, and modal state down to MainContainer
@@ -94,6 +97,23 @@ function App() {
                   </span>
                   <button
                     className="btn"
+                    onClick={() => setHistoryOpen(true)}
+                    style={{
+                      padding: "6px 11px",
+                      borderRadius: 7,
+                      fontSize: 13.2,
+                      marginLeft: 0,
+                      background: "rgba(37,99,235,0.11)",
+                      color: "var(--primary,#2563eb)",
+                      fontWeight: 700,
+                      transition: "background 0.14s"
+                    }}
+                    title="View Past Risk Reports"
+                  >
+                    <span role="img" aria-label="history" style={{marginRight:6}}>📑</span>History
+                  </button>
+                  <button
+                    className="btn"
                     style={{
                       padding: "6px 13px",
                       borderRadius: 7,
@@ -139,6 +159,11 @@ function App() {
         isOpen={isAuthModalOpen}
         onClose={() => setAuthModalOpen(false)}
         onAuthenticate={handleAuthenticated}
+      />
+      <ReportHistoryModal
+        isOpen={isHistoryOpen}
+        onClose={() => setHistoryOpen(false)}
+        user={user}
       />
       <main>
         <div className="container" style={{ paddingTop: 100 }}>

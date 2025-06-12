@@ -1,18 +1,81 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { calculateOverallRisk, getRecommendations } from '../logic/SmartRiskEngine';
+import { saveReport } from "../logic/UserReportStore";
 
 import './StepDashboard.css';
 
-/**
- * PUBLIC_INTERFACE
- * StepDashboard
- * Animated, tabbed dashboard with animated scorecard, micro-interactions, glassmorphism/neumorphism,
- * responsive layout, and stubs for download/email/share.
- */
+// Fallback static quiz questions for reporting and insights
+const QUIZ_QUESTIONS = [
+  {
+    id: 'q1',
+    question: "You receive an email from your 'bank' asking to click a link and verify your account. What should you do?",
+    options: [
+      "Click the link and enter your credentials immediately.",
+      "Delete the email without responding.",
+      "Verify the sender's email, contact the bank directly, and avoid clicking suspicious links.",
+      "Forward the email to friends as a precaution.",
+    ],
+    correct: 2,
+    explanation:
+      "Never click on email links from unknown or suspicious senders. Always independently verify such requests by contacting the bank using official contact info. This prevents phishing attacks."
+  },
+  {
+    id: 'q2',
+    question: "What is the MOST secure way to store your work passwords?",
+    options: [
+      "Write them in a notebook you keep in your desk drawer.",
+      "Save them in a secure, encrypted password manager.",
+      "Email them to yourself so you don't forget.",
+      "Reuse the same simple password everywhere for convenience.",
+    ],
+    correct: 1,
+    explanation:
+      "Use a reputable password manager to create and store unique, complex passwords for all your accounts. Never reuse passwords or write them down in insecure locations."
+  },
+  {
+    id: 'q3',
+    question: "A colleague asks for access to confidential files. The request comes via text message. What should you do?",
+    options: [
+      "Share the files, since you know the colleague.",
+      "Ignore the request.",
+      "Call or verify the request through an official company channel, and follow your organization's data policy.",
+      "Send the files only after your manager approves in writing.",
+    ],
+    correct: 2,
+    explanation:
+      "Always verify sensitive requests using official, secure channels—even if the requester is familiar. This prevents social engineering and potential data leaks."
+  },
+  {
+    id: 'q4',
+    question: "Which of these is a sign of a potentially unsafe website?",
+    options: [
+      "The web address starts with 'https://\' and shows a padlock.",
+      "The site asks for personal data and has spelling errors, odd pop-ups, or mismatched URL.",
+      "It loads very quickly and has a modern design.",
+      "There is a privacy policy linked at the bottom.",
+    ],
+    correct: 1,
+    explanation:
+      "Watch for spelling mistakes, unexpected data requests, mismatched URLs, and aggressive pop-ups—these may signal a phishing site. Always check for 'https://\' but that's not a sole guarantee."
+  },
+  {
+    id: 'q5',
+    question: "Which of the following is LEGALLY acceptable digital behavior at work?",
+    options: [
+      "Sharing copyrighted media via company email to colleagues.",
+      "Using only licensed and approved software for business purposes.",
+      "Downloading torrents on the company network for convenience.",
+      "Forwarding sensitive customer data to your personal email for work-from-home.",
+    ],
+    correct: 1,
+    explanation:
+      "Use only authorized, licensed software for business; unauthorized sharing of media or data can expose you and your employer to legal risk. Never send confidential data to personal accounts."
+  },
+];
 
 /** Simple Toast component for demo CTA feedback */
 function DemoToast({ message, onClose }) {
-  React.useEffect(() => {
+  useEffect(() => {
     if (!message) return;
     const timer = setTimeout(onClose, 2000);
     return () => clearTimeout(timer);
@@ -45,24 +108,23 @@ function DemoToast({ message, onClose }) {
     </div>
   );
 }
-import { saveReport } from "../logic/UserReportStore";
 
 // PUBLIC_INTERFACE
-function ScoreCard({ 
-  quizScore, 
-  contractRisk, 
-  overallScore, 
-  overallGrade, 
-  showToast, 
-  quizRisk, 
-  contractFlags, 
-  contractRecs, 
-  summary, 
-  recommendations 
+function ScoreCard({
+  quizScore,
+  contractRisk,
+  overallScore,
+  overallGrade,
+  showToast,
+  quizRisk,
+  contractFlags,
+  contractRecs,
+  summary,
+  recommendations
 }) {
   // Animate main score (on mount & score change).
   const [animatedScore, setAnimatedScore] = useState(0);
-  React.useEffect(() => {
+  useEffect(() => {
     let raf;
     const duration = 900;
     const start = 0;
@@ -82,9 +144,7 @@ function ScoreCard({
     return () => raf && cancelAnimationFrame(raf);
   }, [overallScore]);
 
-  // Create a simple .txt report summarizing the dashboard results
   function getTextReport() {
-    // Quiz section
     let text = '';
     text += "==== CyberLegal Insight Report ====\n";
     text += `Quiz Score: ${quizScore}/100 (${quizRisk || "N/A"})\n`;
@@ -113,8 +173,6 @@ function ScoreCard({
     return text + "\nGenerated by CyberLegal Insight Hub (https://cyberlegal.kavia.ai)\n";
   }
 
-  // PUBLIC_INTERFACE
-  // Download button handler: generate report as a .txt and trigger browser download
   const handleDownload = () => {
     try {
       const text = getTextReport();
@@ -133,8 +191,6 @@ function ScoreCard({
     }
   };
 
-  // PUBLIC_INTERFACE
-  // Share handler: build a summary string, copy to clipboard, show toast
   const handleShare = async () => {
     const summaryStr = [
       "CyberLegal Insight Brief:",
@@ -150,7 +206,6 @@ function ScoreCard({
         await navigator.clipboard.writeText(summaryStr);
         showToast("Summary copied to clipboard!");
       } else {
-        // fallback approach (not recommended, but basic legacy support)
         const t = document.createElement("textarea");
         t.value = summaryStr;
         document.body.appendChild(t);
@@ -164,7 +219,6 @@ function ScoreCard({
     }
   };
 
-  // Email can remain a stub or be omitted here as not required in the task
   const handleEmail = () => {
     showToast("Email report: Feature coming soon!");
   };
@@ -201,17 +255,9 @@ function ScoreCard({
   );
 }
 
-/**
- * Enhanced: All dashboard tab content is generated dynamically as per quiz and contract state,
- * using fresh contextual logic. Risk-priority labels/explanations are included for actionable guidance.
- */
-
-// PUBLIC_INTERFACE
 function TipsTab({ recommendations, quizRisk, contractFlags, contractRecs }) {
-  // Compose actionable, contextual, and risk-prioritized tips
   const hasContractFindings = Array.isArray(contractFlags) && contractFlags.some(flag => flag && !/no critical/i.test(flag));
   const adviceList = [];
-  // Quiz risk label
   if (quizRisk && quizRisk !== "-") {
     adviceList.push(
       <li key="quizrisklabel">
@@ -225,13 +271,11 @@ function TipsTab({ recommendations, quizRisk, contractFlags, contractRecs }) {
       </li>
     );
   }
-  // System recommendations (from engine)
   for (let i = 0; i < recommendations.length; ++i) {
     adviceList.push(
       <li key={"mainrec"+i}>{recommendations[i]}</li>
     );
   }
-  // Contract findings/tips
   if (hasContractFindings && Array.isArray(contractFlags)) {
     contractFlags.forEach((flag, i) => {
       adviceList.push(
@@ -246,7 +290,6 @@ function TipsTab({ recommendations, quizRisk, contractFlags, contractRecs }) {
       );
     });
   }
-  // Fallback for full safety
   if (!adviceList.length) adviceList.push(<li key="none">No additional recommendations. You're in good shape!</li>);
   return (
     <div className="dashboard-tab">
@@ -258,9 +301,7 @@ function TipsTab({ recommendations, quizRisk, contractFlags, contractRecs }) {
   );
 }
 
-// PUBLIC_INTERFACE
 function Checklist({ items, contractFlags }) {
-  // Compose an actionable checklist, adding contract flags as top priority, labeled by risk
   const checklistItems = [];
   if (
     Array.isArray(contractFlags) && contractFlags.length > 0 &&
@@ -271,7 +312,6 @@ function Checklist({ items, contractFlags }) {
     );
   }
   checklistItems.push(...items);
-  // Dedup and render
   const unique = Array.from(new Set(checklistItems));
   return (
     <div className="dashboard-tab">
@@ -288,9 +328,7 @@ function Checklist({ items, contractFlags }) {
   );
 }
 
-// PUBLIC_INTERFACE
 function ActionPlan({ actionItems, overallGrade, quizRisk, contractFlags }) {
-  // Start with core plan, inject urgent/priority steps based on risk and contract findings
   let plan = [];
   if (
     Array.isArray(contractFlags) && contractFlags.length > 0 &&
@@ -328,14 +366,6 @@ function ActionPlan({ actionItems, overallGrade, quizRisk, contractFlags }) {
   );
 }
 
-/*
- * MAIN DASHBOARD COMPONENT
- * PUBLIC_INTERFACE
- * Aggregates and displays quiz and contract analysis results in an interactive tabbed dashboard.
- * Populates actionable content in all result tabs based on user data.
- */
-
-
 function StepDashboard({
   goToNextStep,
   goToPrevStep,
@@ -347,61 +377,13 @@ function StepDashboard({
   contractFlags,
   contractRecs,
   contractUploaded,
-  user, // <-- Accept user prop for report saving
+  user,
 }) {
-  // Toast state for demo CTA feedback
   const [toastMsg, setToastMsg] = useState("");
   const showToast = (message) => {
     setToastMsg(message);
   };
 
-  // Save a completed report automatically when data changes (only once per mounting for this user/data)
-  React.useEffect(() => {
-    if (!user) return;
-    // Compose report data: essential summary + relevant state
-    const report = {
-      type: "riskAssessment",
-      quizScore: mergedQuizScore,
-      contractRisk: mergedContractRisk,
-      overall: summary,
-      quizRisk: mergedQuizRisk,
-      contractFlags: mergedContractFlags,
-      contractRecs: mergedContractRecs,
-      recommendations,
-      timestamp: Date.now(),
-      quizResults: mergedQuizResults,
-      contractUploaded,
-    };
-    // Save report (avoid duplicate saves by using a flag—report unique per data/user)
-    // We'll save only if not latest, or if there are new results since last save
-    // This is simple to avoid duplicate entries if the dashboard is re-mounted with different data
-    let lastKey = null;
-    try {
-      lastKey = window.sessionStorage.getItem("cyberlegalLastReportKey");
-    } catch {}
-    const newKey = user.username + "|" + summary.riskScore + "|" + Date.now();
-    if (lastKey !== newKey) {
-      saveReport(user, report);
-      try {
-        window.sessionStorage.setItem("cyberlegalLastReportKey", newKey);
-      } catch {}
-    }
-  // Only attempt to save when data changes, or on first load
-  // eslint-disable-next-line
-  }, [
-    user && user.username,
-    mergedQuizScore,
-    mergedContractRisk,
-    mergedQuizRisk,
-    mergedQuizResults && JSON.stringify(mergedQuizResults),
-    mergedContractFlags && JSON.stringify(mergedContractFlags),
-    mergedContractRecs && JSON.stringify(mergedContractRecs),
-    summary && summary.riskScore,
-    recommendations && recommendations[0], // at least, catch overall rec
-    contractUploaded,
-  ]);
-
-  // Data flow: prefer explicit state from props, else fallback to appData, else demo values
   const mergedQuizScore =
     quizScore ??
     appData?.quizScore ??
@@ -429,14 +411,52 @@ function StepDashboard({
     appData?.contractRecs ??
     [];
 
-  // Overall/summary risk analysis
   const summary = calculateOverallRisk({
     quizScore: mergedQuizScore,
     contractRisk: mergedContractRisk
   });
   const recommendations = getRecommendations(summary.riskGrade);
 
-  // Assemble checklist and actions with real/derived data
+  useEffect(() => {
+    if (!user) return;
+    const report = {
+      type: "riskAssessment",
+      quizScore: mergedQuizScore,
+      contractRisk: mergedContractRisk,
+      overall: summary,
+      quizRisk: mergedQuizRisk,
+      contractFlags: mergedContractFlags,
+      contractRecs: mergedContractRecs,
+      recommendations,
+      timestamp: Date.now(),
+      quizResults: mergedQuizResults,
+      contractUploaded,
+    };
+    let lastKey = null;
+    try {
+      lastKey = window.sessionStorage.getItem("cyberlegalLastReportKey");
+    } catch {}
+    const newKey = user.username + "|" + summary.riskScore + "|" + Date.now();
+    if (lastKey !== newKey) {
+      saveReport(user, report);
+      try {
+        window.sessionStorage.setItem("cyberlegalLastReportKey", newKey);
+      } catch {}
+    }
+    // eslint-disable-next-line
+  }, [
+    user && user.username,
+    mergedQuizScore,
+    mergedContractRisk,
+    mergedQuizRisk,
+    mergedQuizResults && JSON.stringify(mergedQuizResults),
+    mergedContractFlags && JSON.stringify(mergedContractFlags),
+    mergedContractRecs && JSON.stringify(mergedContractRecs),
+    summary && summary.riskScore,
+    recommendations && recommendations[0],
+    contractUploaded,
+  ]);
+
   const checklist = [
     ...recommendations.map(r => r.replace(/[.!?]$/, '')),
     "Update passwords across key accounts",
@@ -449,87 +469,6 @@ function StepDashboard({
     "Retake quiz in 90 days"
   ];
 
-  // --- Quiz insights with detailed per-question feedback ---
-  // We'll use the quiz questions (with explanations) for insights display.
-  let QUIZ_QUESTIONS = undefined;
-  try {
-    // Dynamically require or import the quiz questions.
-    // We'll use a dummy-local import like below (if available).
-    QUIZ_QUESTIONS = require('../steps/StepCyberQuiz').default?.QUIZ_QUESTIONS ||
-                     require('../steps/StepCyberQuiz').QUIZ_QUESTIONS ||
-                     undefined;
-  } catch (e) {
-    // fallback: we'll redeclare here if bundler blocks require()
-    QUIZ_QUESTIONS = [
-      {
-        id: 'q1',
-        question: "You receive an email from your 'bank' asking to click a link and verify your account. What should you do?",
-        options: [
-          "Click the link and enter your credentials immediately.",
-          "Delete the email without responding.",
-          "Verify the sender's email, contact the bank directly, and avoid clicking suspicious links.",
-          "Forward the email to friends as a precaution.",
-        ],
-        correct: 2,
-        explanation:
-          "Never click on email links from unknown or suspicious senders. Always independently verify such requests by contacting the bank using official contact info. This prevents phishing attacks."
-      },
-      {
-        id: 'q2',
-        question: "What is the MOST secure way to store your work passwords?",
-        options: [
-          "Write them in a notebook you keep in your desk drawer.",
-          "Save them in a secure, encrypted password manager.",
-          "Email them to yourself so you don't forget.",
-          "Reuse the same simple password everywhere for convenience.",
-        ],
-        correct: 1,
-        explanation:
-          "Use a reputable password manager to create and store unique, complex passwords for all your accounts. Never reuse passwords or write them down in insecure locations."
-      },
-      {
-        id: 'q3',
-        question: "A colleague asks for access to confidential files. The request comes via text message. What should you do?",
-        options: [
-          "Share the files, since you know the colleague.",
-          "Ignore the request.",
-          "Call or verify the request through an official company channel, and follow your organization's data policy.",
-          "Send the files only after your manager approves in writing.",
-        ],
-        correct: 2,
-        explanation:
-          "Always verify sensitive requests using official, secure channels—even if the requester is familiar. This prevents social engineering and potential data leaks."
-      },
-      {
-        id: 'q4',
-        question: "Which of these is a sign of a potentially unsafe website?",
-        options: [
-          "The web address starts with 'https://' and shows a padlock.",
-          "The site asks for personal data and has spelling errors, odd pop-ups, or mismatched URL.",
-          "It loads very quickly and has a modern design.",
-          "There is a privacy policy linked at the bottom.",
-        ],
-        correct: 1,
-        explanation:
-          "Watch for spelling mistakes, unexpected data requests, mismatched URLs, and aggressive pop-ups—these may signal a phishing site. Always check for 'https://' but that's not a sole guarantee."
-      },
-      {
-        id: 'q5',
-        question: "Which of the following is LEGALLY acceptable digital behavior at work?",
-        options: [
-          "Sharing copyrighted media via company email to colleagues.",
-          "Using only licensed and approved software for business purposes.",
-          "Downloading torrents on the company network for convenience.",
-          "Forwarding sensitive customer data to your personal email for work-from-home.",
-        ],
-        correct: 1,
-        explanation:
-          "Use only authorized, licensed software for business; unauthorized sharing of media or data can expose you and your employer to legal risk. Never send confidential data to personal accounts."
-      },
-    ];
-  }
-
-  // Now, generate detailed insight items for each answered quiz question:
   const quizInsight =
     mergedQuizResults && Array.isArray(mergedQuizResults) && QUIZ_QUESTIONS
       ? (
@@ -604,7 +543,6 @@ function StepDashboard({
         </div>
       );
 
-  // Contract findings per actual user input
   const contractFindings = contractUploaded === false
     ? (
       <div>
@@ -634,7 +572,6 @@ function StepDashboard({
       </div>
     );
 
-  // Compose all dashboard tabs
   const TABS = [
     {
       label: "Summary",
@@ -701,10 +638,8 @@ function StepDashboard({
     }
   ];
   const [tab, setTab] = useState(0);
-
-  // Animate fade-in for tab panel on change
   const [tabKey, setTabKey] = useState(0);
-  React.useEffect(() => { setTabKey(tab + Math.random()); }, [tab]);
+  useEffect(() => { setTabKey(tab + Math.random()); }, [tab]);
 
   return (
     <div className="step step-dashboard" style={{
@@ -758,8 +693,4 @@ function StepDashboard({
   );
 }
 
-// Simple style for the toast feedback (injected inline for demo)
-// In a real app, move to StepDashboard.css
-// Toast will pop down, then fade out
-// Anim class handled by the component; just a quick transition for now.
 export default StepDashboard;
