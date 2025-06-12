@@ -7,38 +7,16 @@
 <i> [webpack-dev-server] On Your Network (IPv4): http://172.17.0.2:3000/
 <i> [webpack-dev-server] Content not from webpack is served from './public' directory
 Injecting EditorRootWrapper import: ../.ve/EditorRootWrapper
-asset bundle.js 1.53 MiB [emitted] (name: main)
+asset bundle.js 1.54 MiB [emitted] (name: main)
 asset index.html 1.92 KiB [emitted]
 runtime modules 27.5 KiB 14 modules
 cacheable modules 1.37 MiB
   modules by path ./node_modules/ 1.24 MiB 31 modules
-  modules by path ./src/ 114 KiB 19 modules
+  modules by path ./src/ 120 KiB 20 modules
   modules by path ./.ve/ 15.1 KiB
     modules by path ./.ve/*.js 10.6 KiB 2 modules
     modules by path ./.ve/*.css 2.93 KiB
       ./.ve/EditorOverlay.css 2.25 KiB [built] [code generated]
       ./node_modules/css-loader/dist/cjs.js!./.ve/EditorOverlay.css 697 bytes [built] [code generated]
     ./.ve/EditorOverlay.jsx 1.58 KiB [built] [code generated]
-webpack 5.99.9 compiled successfully in 1709 ms
-assets by status 1.92 KiB [cached] 1 asset
-assets by path *.js 1.55 MiB
-  asset bundle.js 1.53 MiB [emitted] (name: main)
-  asset main.73d80518ec11623bb4e4.hot-update.js 12.5 KiB [emitted] [immutable] [hmr] (name: main)
-asset main.73d80518ec11623bb4e4.hot-update.json 28 bytes [emitted] [immutable] [hmr]
-Entrypoint main 1.55 MiB = bundle.js 1.53 MiB main.73d80518ec11623bb4e4.hot-update.js 12.5 KiB
-cached modules 1.36 MiB [cached] 54 modules
-runtime modules 27.5 KiB 14 modules
-javascript modules 7.47 KiB
-  ./src/App.js 2.84 KiB [built] [code generated]
-  ./src/ui/CyberLegalLogo.js 4.62 KiB [built] [code generated]
-webpack 5.99.9 compiled successfully in 156 ms
-assets by status 1.92 KiB [cached] 1 asset
-assets by path *.js 1.55 MiB
-  asset bundle.js 1.54 MiB [emitted] (name: main)
-  asset main.6ad4ff63c8ab39205d44.hot-update.js 11.1 KiB [emitted] [immutable] [hmr] (name: main)
-asset main.6ad4ff63c8ab39205d44.hot-update.json 28 bytes [emitted] [immutable] [hmr]
-Entrypoint main 1.55 MiB = bundle.js 1.54 MiB main.6ad4ff63c8ab39205d44.hot-update.js 11.1 KiB
-cached modules 1.36 MiB [cached] 55 modules
-runtime modules 27.5 KiB 14 modules
-./node_modules/css-loader/dist/cjs.js!./src/App.css 8.39 KiB [built] [code generated]
-webpack 5.99.9 compiled successfully in 67 ms
+webpack 5.99.9 compiled successfully in 1735 ms
