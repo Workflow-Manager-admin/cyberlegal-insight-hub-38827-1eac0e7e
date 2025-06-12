@@ -7,48 +7,38 @@
 <i> [webpack-dev-server] On Your Network (IPv4): http://172.17.0.2:3000/
 <i> [webpack-dev-server] Content not from webpack is served from './public' directory
 Injecting EditorRootWrapper import: ../.ve/EditorRootWrapper
-asset bundle.js 1.6 MiB [emitted] (name: main)
+asset bundle.js 1.62 MiB [emitted] (name: main)
 asset index.html 1.92 KiB [emitted]
 runtime modules 27.5 KiB 14 modules
-cacheable modules 1.42 MiB
+cacheable modules 1.44 MiB
   modules by path ./node_modules/ 1.24 MiB 31 modules
-  modules by path ./src/ 175 KiB 24 modules
+  modules by path ./src/ 188 KiB 25 modules
   modules by path ./.ve/ 15.1 KiB
     modules by path ./.ve/*.js 10.6 KiB 2 modules
     modules by path ./.ve/*.css 2.93 KiB
       ./.ve/EditorOverlay.css 2.25 KiB [built] [code generated]
       ./node_modules/css-loader/dist/cjs.js!./.ve/EditorOverlay.css 697 bytes [built] [code generated]
     ./.ve/EditorOverlay.jsx 1.58 KiB [built] [code generated]
-webpack 5.99.9 compiled successfully in 1845 ms
+webpack 5.99.9 compiled successfully in 1893 ms
 assets by status 1.92 KiB [cached] 1 asset
-assets by path *.js 1.66 MiB
-  asset bundle.js 1.62 MiB [emitted] (name: main)
-  asset main.d1e72d95c1e5e5b55879.hot-update.js 47.3 KiB [emitted] [immutable] [hmr] (name: main)
-asset main.d1e72d95c1e5e5b55879.hot-update.json 28 bytes [emitted] [immutable] [hmr]
-Entrypoint main 1.66 MiB = bundle.js 1.62 MiB main.d1e72d95c1e5e5b55879.hot-update.js 47.3 KiB
-cached modules 1.4 MiB [cached] 59 modules
-runtime modules 27.5 KiB 14 modules
-javascript modules 36.9 KiB
-  ./src/ui/ReportHistoryModal.js 24.6 KiB [built] [code generated]
-  ./src/ui/TimelineComponent.js 12.3 KiB [built] [code generated]
-webpack 5.99.9 compiled successfully in 271 ms
-assets by status 1.92 KiB [cached] 1 asset
-assets by path *.js 1.65 MiB
-  asset bundle.js 1.62 MiB [emitted] (name: main)
-  asset main.78c97afcf5ac24ac64d6.hot-update.js 32 KiB [emitted] [immutable] [hmr] (name: main)
-asset main.78c97afcf5ac24ac64d6.hot-update.json 28 bytes [emitted] [immutable] [hmr]
-Entrypoint main 1.65 MiB = bundle.js 1.62 MiB main.78c97afcf5ac24ac64d6.hot-update.js 32 KiB
-cached modules 1.41 MiB [cached] 60 modules
-runtime modules 27.5 KiB 14 modules
-./src/ui/ReportHistoryModal.js 24.8 KiB [built] [code generated]
-webpack 5.99.9 compiled successfully in 119 ms
-assets by status 1.92 KiB [cached] 1 asset
-assets by path *.js 1.63 MiB
-  asset bundle.js 1.62 MiB [emitted] (name: main)
-  asset main.d3cac06f4274112c52c3.hot-update.js 16.6 KiB [emitted] [immutable] [hmr] (name: main)
-asset main.d3cac06f4274112c52c3.hot-update.json 28 bytes [emitted] [immutable] [hmr]
-Entrypoint main 1.63 MiB = bundle.js 1.62 MiB main.d3cac06f4274112c52c3.hot-update.js 16.6 KiB
+assets by path *.js 1.67 MiB
+  asset bundle.js 1.64 MiB [emitted] (name: main)
+  asset main.09468de79bb46e89e7b1.hot-update.js 30.8 KiB [emitted] [immutable] [hmr] (name: main)
+asset main.09468de79bb46e89e7b1.hot-update.json 28 bytes [emitted] [immutable] [hmr]
+Entrypoint main 1.67 MiB = bundle.js 1.64 MiB main.09468de79bb46e89e7b1.hot-update.js 30.8 KiB
 cached modules 1.43 MiB [cached] 60 modules
 runtime modules 27.5 KiB 14 modules
-./src/ui/TimelineComponent.js 12.5 KiB [built] [code generated]
-webpack 5.99.9 compiled successfully in 68 ms
+javascript modules 23.4 KiB
+  ./src/App.js 7.72 KiB [built] [code generated]
+  ./src/ui/SidebarAssistant.js 15.7 KiB [built] [code generated]
+webpack 5.99.9 compiled successfully in 164 ms
+assets by status 1.92 KiB [cached] 1 asset
+assets by path *.js 1.65 MiB
+  asset bundle.js 1.64 MiB [emitted] (name: main)
+  asset main.9803a51131dd811b4980.hot-update.js 12.2 KiB [emitted] [immutable] [hmr] (name: main)
+asset main.9803a51131dd811b4980.hot-update.json 28 bytes [emitted] [immutable] [hmr]
+Entrypoint main 1.65 MiB = bundle.js 1.64 MiB main.9803a51131dd811b4980.hot-update.js 12.2 KiB
+cached modules 1.45 MiB [cached] 61 modules
+runtime modules 27.5 KiB 14 modules
+./src/App.js 7.81 KiB [built] [code generated]
+webpack 5.99.9 compiled successfully in 74 ms

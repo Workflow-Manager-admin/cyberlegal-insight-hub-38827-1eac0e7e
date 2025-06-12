@@ -5,6 +5,7 @@ import ThemeToggle from './ui/ThemeToggle';
 import CyberLegalLogo from './ui/CyberLegalLogo';
 import AuthenticationModal from './ui/AuthenticationModal';
 import ReportHistoryModal from './ui/ReportHistoryModal';
+import SidebarAssistant from './ui/SidebarAssistant';
 
 /**
  * App.js
@@ -171,6 +172,8 @@ function App() {
           <MainContainer />
         </div>
       </main>
+      {/* SidebarAssistant is globally accessible, floating; open/close via FAB */}
+      <SidebarAssistant />
     </div>
   );
 }
