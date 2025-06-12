@@ -201,6 +201,40 @@ body,
   box-shadow: 0 8px 32px 0 rgba(19,22,34,0.11), 0 1.2px 2.4px 0 var(--glass-border);
   padding: 2.1rem 1.5rem;
   transition: background 0.22s, box-shadow 0.22s;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Thank You Step Confetti override for visual layering */
+.step-thankyou {
+  position: relative;
+  min-height: 420px;
+  background: none !important;
+  z-index: 0;
+}
+.step-thankyou .glass-card {
+  margin-top: 60px;
+  margin-bottom: 35px;
+  max-width: 480px;
+  width: 99%;
+  box-shadow: 0 8px 34px 0 rgba(19,22,34,0.16);
+}
+@media (max-width: 600px) {
+  .step-thankyou .glass-card {
+    max-width: 99vw;
+    margin-top: 38px;
+    padding: 1.05rem 0.55rem 1.22rem 0.55rem;
+  }
+  .step-thankyou {
+    min-height: 330px;
+  }
+}
+@media (max-width: 399px) {
+  .step-thankyou .glass-card {
+    margin-top: 18px;
+    padding: 0.45rem 0.23rem 0.78rem 0.23rem;
+    font-size: 0.97rem;
+  }
 }
 
 /* Neumorphic baseline for card/inputs */
