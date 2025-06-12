@@ -35,14 +35,13 @@ function ScoreCard({ quizScore, contractRisk, overallScore, overallGrade }) {
 
   // ACTION STUBS
   const handleDownload = () => {
-    // Stub action: no-op, could integrate with PDF export logic.
-    alert("Download action (stub).");
+    alert("Download as PDF coming soon!");
   };
   const handleEmail = () => {
-    alert("Email action (stub).");
+    alert("Email results: Placeholder action.");
   };
   const handleShare = () => {
-    alert("Share action (stub).");
+    alert("Share results: Placeholder action.");
   };
 
   return (
@@ -78,27 +77,51 @@ function ScoreCard({ quizScore, contractRisk, overallScore, overallGrade }) {
 }
 
 // PUBLIC_INTERFACE
-function TipsTab({ recommendations }) {
+function TipsTab({ recommendations, quizRisk, contractFlags, contractRecs }) {
+  // Populate recommendations with dynamic, risk-based tips
+  const hasContractFindings = contractFlags && contractFlags.length > 0 && !contractFlags.includes("No critical red flags detected.");
+  const contractAdvice = hasContractFindings
+    ? contractFlags.concat(contractRecs).map((tip, idx) => (
+        <li key={'flag' + idx}>{tip}</li>
+      ))
+    : [];
+
+  // Combine AI/system recs, quiz advice, and contract suggestions
   return (
     <div className="dashboard-tab">
       <h4 style={{marginTop:0,marginBottom:6}}>Smart Recommendations</h4>
       <ul>
         {recommendations.map((r, idx) =>
-          <li key={idx} style={{marginBottom: 2}}>{r}</li>
+          <li key={'mainrec'+idx} style={{marginBottom: 2}}>{r}</li>
         )}
+        {quizRisk && (
+          <li key="quizrisk" style={{color: '#2563eb', marginTop: 7}}><b>Quiz Risk Level:</b> {quizRisk}</li>
+        )}
+        {contractAdvice}
       </ul>
     </div>
   );
 }
 
 // PUBLIC_INTERFACE
-function Checklist({ items }) {
-  // Add a simple checkmark animation stub for demo.
+function Checklist({ items, contractFlags }) {
+  // Dynamically add contract issues to checklist, if any are risky
+  const autoItems = [...items];
+  if (
+    Array.isArray(contractFlags) &&
+    contractFlags.length > 0 &&
+    !contractFlags.includes("No critical red flags detected.")
+  ) {
+    // Prepend contract risks high-priority to the list
+    contractFlags.forEach(flag =>
+      autoItems.unshift("Review contract issue: " + flag)
+    );
+  }
   return (
     <div className="dashboard-tab">
       <h4 style={{marginTop:0,marginBottom:6}}>Quick Checklist</h4>
       <ol className="dashboard-checklist">
-        {items.map((item, idx) =>
+        {autoItems.map((item, idx) =>
           <li key={idx}>
             <span className="checklist-bullet" aria-label="check" role="img">✅</span>
             {item}
@@ -110,13 +133,34 @@ function Checklist({ items }) {
 }
 
 // PUBLIC_INTERFACE
-function ActionPlan({ actionItems }) {
-  // Micro-animation: alternate dot color for steps.
+function ActionPlan({ actionItems, overallGrade, quizRisk, contractFlags }) {
+  // Dynamically prioritize plan based on risk: severe/high → urgent, else routine
+  let plan = [...actionItems];
+  if (
+    (overallGrade === 'Severe' || overallGrade === 'High') &&
+    (!plan.includes("Schedule a compliance audit."))
+  ) {
+    plan.unshift("Schedule a compliance audit.");
+  }
+  if (quizRisk === 'Severe' || quizRisk === 'High') {
+    plan.unshift("Take phishing and cyber risk training.");
+  }
+  if (
+    Array.isArray(contractFlags) &&
+    contractFlags.length > 0 &&
+    !contractFlags.includes("No critical red flags detected.")
+  ) {
+    contractFlags.forEach(f =>
+      plan.unshift("Address contract finding: " + f)
+    );
+  }
+  // Remove near-duplicates
+  plan = [...new Set(plan)];
   return (
     <div className="dashboard-tab">
       <h4 style={{marginTop:0,marginBottom:6}}>Action Plan</h4>
       <ul>
-        {actionItems.map((act, idx) =>
+        {plan.map((act, idx) =>
           <li key={idx}>
             <span className="actionplan-dot" style={{
               filter: idx === 0 ? "brightness(1.04) saturate(1.12)" : "",
@@ -133,7 +177,8 @@ function ActionPlan({ actionItems }) {
 /*
  * MAIN DASHBOARD COMPONENT
  * PUBLIC_INTERFACE
- * Now aggregates and displays quiz and contract analysis results in an interactive tabbed dashboard.
+ * Aggregates and displays quiz and contract analysis results in an interactive tabbed dashboard.
+ * Populates actionable content in all result tabs based on user data.
  */
 function StepDashboard({
   goToNextStep,
@@ -176,14 +221,14 @@ function StepDashboard({
     appData?.contractRecs ??
     [];
 
-  // Core overall risk
+  // Overall/summary risk analysis
   const summary = calculateOverallRisk({
     quizScore: mergedQuizScore,
     contractRisk: mergedContractRisk
   });
   const recommendations = getRecommendations(summary.riskGrade);
 
-  // Prepare combined insights for display in tabs
+  // Assemble checklist and actions with real/derived data
   const checklist = [
     ...recommendations.map(r => r.replace(/[.!?]$/, '')),
     "Update passwords across key accounts",
@@ -196,7 +241,7 @@ function StepDashboard({
     "Retake quiz in 90 days"
   ];
 
-  // Enhanced: Prepare insights for all tabs
+  // Show granular quiz results in tab
   const quizInsight = mergedQuizResults && Array.isArray(mergedQuizResults)
     ? (
         <div>
@@ -229,6 +274,7 @@ function StepDashboard({
         </div>
       );
 
+  // Contract findings per actual user input
   const contractFindings = contractUploaded === false
     ? (
       <div>
@@ -258,7 +304,7 @@ function StepDashboard({
       </div>
     );
 
-  // Tab definition for richer tab experience
+  // Compose all dashboard tabs
   const TABS = [
     {
       label: "Summary",
@@ -298,17 +344,30 @@ function StepDashboard({
     {
       label: "Tips",
       icon: "💡",
-      content: <TipsTab recommendations={recommendations} />
+      content: <TipsTab
+        recommendations={recommendations}
+        quizRisk={mergedQuizRisk}
+        contractFlags={mergedContractFlags}
+        contractRecs={mergedContractRecs}
+      />
     },
     {
       label: "Checklist",
       icon: "☑️",
-      content: <Checklist items={checklist} />
+      content: <Checklist
+        items={checklist}
+        contractFlags={mergedContractFlags}
+      />
     },
     {
       label: "Action Plan",
       icon: "🚀",
-      content: <ActionPlan actionItems={actionPlan} />
+      content: <ActionPlan
+        actionItems={actionPlan}
+        overallGrade={summary.riskGrade}
+        quizRisk={mergedQuizRisk}
+        contractFlags={mergedContractFlags}
+      />
     }
   ];
   const [tab, setTab] = useState(0);
@@ -317,7 +376,6 @@ function StepDashboard({
   const [tabKey, setTabKey] = useState(0);
   React.useEffect(() => { setTabKey(tab + Math.random()); }, [tab]);
 
-  // Responsive margin for top/bottom
   return (
     <div className="step step-dashboard" style={{
       display: 'flex', flexDirection: 'column', alignItems: 'center'
@@ -333,7 +391,6 @@ function StepDashboard({
         overallScore={summary.riskScore}
         overallGrade={summary.riskGrade}
       />
-      {/* Tabbed navigation */}
       <div className="dashboard-tabs-nav" role="tablist" aria-label="Dashboard Subsections">
         {TABS.map((t, i) =>
           <button
@@ -350,13 +407,9 @@ function StepDashboard({
           </button>
         )}
       </div>
-
-      {/* Animated content panel for tab */}
       <div className="dashboard-tabs-panel anim-fadein" key={tabKey}>
         {TABS[tab].content}
       </div>
-
-      {/* Footer navigation buttons */}
       <div style={{
         marginTop: 30, display: 'flex', gap: 18, flexWrap: "wrap",
         justifyContent: "center"
