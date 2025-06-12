@@ -56,19 +56,34 @@ function MainContainer() {
   const StepComponent = steps[currentStep].component;
 
   return (
-    <div className="main-container">
+    <div
+      className="main-container"
+      style={{
+        width: '100%',
+        minHeight: '60vh',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        gap: 28,
+        margin: '0 auto',
+        padding: '24px 0',
+      }}
+      tabIndex={-1}
+    >
       {/* Example: Progress bar (renders except last/thank you step) */}
       {currentStep < steps.length - 1 && (
         <ProgressBar current={currentStep} total={steps.length - 1} />
       )}
       {/* Step content */}
-      <StepComponent
-        appData={appData}
-        setAppData={setAppData}
-        goToNextStep={goToNextStep}
-        goToPrevStep={goToPrevStep}
-        currentStep={currentStep}
-      />
+      <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+        <StepComponent
+          appData={appData}
+          setAppData={setAppData}
+          goToNextStep={goToNextStep}
+          goToPrevStep={goToPrevStep}
+          currentStep={currentStep}
+        />
+      </div>
     </div>
   );
 }

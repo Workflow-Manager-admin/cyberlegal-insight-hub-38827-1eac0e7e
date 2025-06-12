@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 import MainContainer from './containers/MainContainer';
+import ThemeToggle from './ui/ThemeToggle';
 
 /**
  * App.js
@@ -11,17 +12,17 @@ function App() {
     <div className="app">
       <nav className="navbar">
         <div className="container">
-          <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
             <div className="logo">
               <span className="logo-symbol">*</span> KAVIA AI
             </div>
-            {/* Insert global controls (e.g., theme toggle) here */}
-            <button className="btn">Menu</button>
+            {/* Global controls - Theme toggle */}
+            <ThemeToggle />
           </div>
         </div>
       </nav>
       <main>
-        <div className="container" style={{paddingTop: 100}}>
+        <div className="container" style={{ paddingTop: 100 }}>
           {/* MainContainer orchestrates the entire step flow */}
           <MainContainer />
         </div>
