@@ -132,7 +132,8 @@ function MainContainer() {
                 contractFlags: appData.contractFlags,
                 contractRecs: appData.contractRecs,
                 // Whether the user actually submitted/uploaded/pasted a contract
-                contractUploaded: appData.contractUploaded
+                contractUploaded: appData.contractUploaded,
+                user  // <-- Explicitly forward user to StepDashboard for report saving
               }
             : {})}
         />

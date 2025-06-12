@@ -331,24 +331,74 @@ function ActionPlan({ actionItems, overallGrade, quizRisk, contractFlags }) {
  * Aggregates and displays quiz and contract analysis results in an interactive tabbed dashboard.
  * Populates actionable content in all result tabs based on user data.
  */
+import { saveReport } from "../logic/UserReportStore";
+
+import { saveReport } from "../logic/UserReportStore";
+
 function StepDashboard({
   goToNextStep,
   goToPrevStep,
   appData,
-  // Also accept quiz/contract values via props for flexibility
   quizScore,
   quizRisk,
   quizResults,
   contractRisk,
   contractFlags,
   contractRecs,
-  contractUploaded
+  contractUploaded,
+  user, // <-- Accept user prop for report saving
 }) {
   // Toast state for demo CTA feedback
   const [toastMsg, setToastMsg] = useState("");
   const showToast = (message) => {
     setToastMsg(message);
   };
+
+  // Save a completed report automatically when data changes (only once per mounting for this user/data)
+  React.useEffect(() => {
+    if (!user) return;
+    // Compose report data: essential summary + relevant state
+    const report = {
+      type: "riskAssessment",
+      quizScore: mergedQuizScore,
+      contractRisk: mergedContractRisk,
+      overall: summary,
+      quizRisk: mergedQuizRisk,
+      contractFlags: mergedContractFlags,
+      contractRecs: mergedContractRecs,
+      recommendations,
+      timestamp: Date.now(),
+      quizResults: mergedQuizResults,
+      contractUploaded,
+    };
+    // Save report (avoid duplicate saves by using a flag—report unique per data/user)
+    // We'll save only if not latest, or if there are new results since last save
+    // This is simple to avoid duplicate entries if the dashboard is re-mounted with different data
+    let lastKey = null;
+    try {
+      lastKey = window.sessionStorage.getItem("cyberlegalLastReportKey");
+    } catch {}
+    const newKey = user.username + "|" + summary.riskScore + "|" + Date.now();
+    if (lastKey !== newKey) {
+      saveReport(user, report);
+      try {
+        window.sessionStorage.setItem("cyberlegalLastReportKey", newKey);
+      } catch {}
+    }
+  // Only attempt to save when data changes, or on first load
+  // eslint-disable-next-line
+  }, [
+    user && user.username,
+    mergedQuizScore,
+    mergedContractRisk,
+    mergedQuizRisk,
+    mergedQuizResults && JSON.stringify(mergedQuizResults),
+    mergedContractFlags && JSON.stringify(mergedContractFlags),
+    mergedContractRecs && JSON.stringify(mergedContractRecs),
+    summary && summary.riskScore,
+    recommendations && recommendations[0], // at least, catch overall rec
+    contractUploaded,
+  ]);
 
   // Data flow: prefer explicit state from props, else fallback to appData, else demo values
   const mergedQuizScore =
