@@ -76,28 +76,58 @@ function ScoreCard({ quizScore, contractRisk, overallScore, overallGrade }) {
   );
 }
 
+/**
+ * Enhanced: All dashboard tab content is generated dynamically as per quiz and contract state,
+ * using fresh contextual logic. Risk-priority labels/explanations are included for actionable guidance.
+ */
+
 // PUBLIC_INTERFACE
 function TipsTab({ recommendations, quizRisk, contractFlags, contractRecs }) {
-  // Populate recommendations with dynamic, risk-based tips
-  const hasContractFindings = contractFlags && contractFlags.length > 0 && !contractFlags.includes("No critical red flags detected.");
-  const contractAdvice = hasContractFindings
-    ? contractFlags.concat(contractRecs).map((tip, idx) => (
-        <li key={'flag' + idx}>{tip}</li>
-      ))
-    : [];
-
-  // Combine AI/system recs, quiz advice, and contract suggestions
+  // Compose actionable, contextual, and risk-prioritized tips
+  const hasContractFindings = Array.isArray(contractFlags) && contractFlags.some(flag => flag && !/no critical/i.test(flag));
+  const adviceList = [];
+  // Quiz risk label
+  if (quizRisk && quizRisk !== "-") {
+    adviceList.push(
+      <li key="quizrisklabel">
+        <b>Quiz Risk Level:</b> <span style={{color: quizRisk === 'Severe' ? "#b82727" : quizRisk === 'High' ? "#e87a41" : "#2563eb"}}>{quizRisk}</span>
+        {quizRisk === "Severe" && (
+          <span style={{color:"#b82727", fontWeight:500, marginLeft:8}}>❗ Immediate improvement needed.</span>
+        )}
+        {quizRisk === "High" && (
+          <span style={{color:"#e87a41", fontWeight:500, marginLeft:8}}>⚠️ Review weak areas soon.</span>
+        )}
+      </li>
+    );
+  }
+  // System recommendations (from engine)
+  for (let i = 0; i < recommendations.length; ++i) {
+    adviceList.push(
+      <li key={"mainrec"+i}>{recommendations[i]}</li>
+    );
+  }
+  // Contract findings/tips
+  if (hasContractFindings && Array.isArray(contractFlags)) {
+    contractFlags.forEach((flag, i) => {
+      adviceList.push(
+        <li key={"flag"+i}><b>Contract Issue:</b> {flag}</li>
+      );
+    });
+  }
+  if (hasContractFindings && Array.isArray(contractRecs)) {
+    contractRecs.forEach((rec, i) => {
+      adviceList.push(
+        <li key={"recs"+i}><b>Legal Tip:</b> {rec}</li>
+      );
+    });
+  }
+  // Fallback for full safety
+  if (!adviceList.length) adviceList.push(<li key="none">No additional recommendations. You're in good shape!</li>);
   return (
     <div className="dashboard-tab">
       <h4 style={{marginTop:0,marginBottom:6}}>Smart Recommendations</h4>
       <ul>
-        {recommendations.map((r, idx) =>
-          <li key={'mainrec'+idx} style={{marginBottom: 2}}>{r}</li>
-        )}
-        {quizRisk && (
-          <li key="quizrisk" style={{color: '#2563eb', marginTop: 7}}><b>Quiz Risk Level:</b> {quizRisk}</li>
-        )}
-        {contractAdvice}
+        {adviceList}
       </ul>
     </div>
   );
@@ -105,23 +135,24 @@ function TipsTab({ recommendations, quizRisk, contractFlags, contractRecs }) {
 
 // PUBLIC_INTERFACE
 function Checklist({ items, contractFlags }) {
-  // Dynamically add contract issues to checklist, if any are risky
-  const autoItems = [...items];
+  // Compose an actionable checklist, adding contract flags as top priority, labeled by risk
+  const checklistItems = [];
   if (
-    Array.isArray(contractFlags) &&
-    contractFlags.length > 0 &&
-    !contractFlags.includes("No critical red flags detected.")
+    Array.isArray(contractFlags) && contractFlags.length > 0 &&
+    !contractFlags.some(flag => /no critical/i.test(flag))
   ) {
-    // Prepend contract risks high-priority to the list
-    contractFlags.forEach(flag =>
-      autoItems.unshift("Review contract issue: " + flag)
+    contractFlags.forEach((flag, i) =>
+      checklistItems.push(`Review contract finding: ${flag}`)
     );
   }
+  checklistItems.push(...items);
+  // Dedup and render
+  const unique = Array.from(new Set(checklistItems));
   return (
     <div className="dashboard-tab">
       <h4 style={{marginTop:0,marginBottom:6}}>Quick Checklist</h4>
       <ol className="dashboard-checklist">
-        {autoItems.map((item, idx) =>
+        {unique.map((item, idx) =>
           <li key={idx}>
             <span className="checklist-bullet" aria-label="check" role="img">✅</span>
             {item}
@@ -134,28 +165,26 @@ function Checklist({ items, contractFlags }) {
 
 // PUBLIC_INTERFACE
 function ActionPlan({ actionItems, overallGrade, quizRisk, contractFlags }) {
-  // Dynamically prioritize plan based on risk: severe/high → urgent, else routine
-  let plan = [...actionItems];
+  // Start with core plan, inject urgent/priority steps based on risk and contract findings
+  let plan = [];
   if (
-    (overallGrade === 'Severe' || overallGrade === 'High') &&
-    (!plan.includes("Schedule a compliance audit."))
+    Array.isArray(contractFlags) && contractFlags.length > 0 &&
+    !contractFlags.some(flag => /no critical/i.test(flag))
   ) {
-    plan.unshift("Schedule a compliance audit.");
-  }
-  if (quizRisk === 'Severe' || quizRisk === 'High') {
-    plan.unshift("Take phishing and cyber risk training.");
-  }
-  if (
-    Array.isArray(contractFlags) &&
-    contractFlags.length > 0 &&
-    !contractFlags.includes("No critical red flags detected.")
-  ) {
-    contractFlags.forEach(f =>
-      plan.unshift("Address contract finding: " + f)
+    contractFlags.forEach(flag =>
+      plan.push(`URGENT: Address contract finding: ${flag}`)
     );
   }
-  // Remove near-duplicates
-  plan = [...new Set(plan)];
+  if (quizRisk === "Severe" || quizRisk === "High") {
+    plan.push("URGENT: Take phishing/cyber training ASAP");
+  }
+  if (overallGrade === "Severe" && !plan.includes("URGENT: Schedule compliance/legal audit")) {
+    plan.push("URGENT: Schedule compliance/legal audit");
+  } else if (overallGrade === "High" && !plan.includes("Schedule compliance review")) {
+    plan.push("Schedule compliance review");
+  }
+  plan.push(...actionItems);
+  plan = Array.from(new Set(plan));
   return (
     <div className="dashboard-tab">
       <h4 style={{marginTop:0,marginBottom:6}}>Action Plan</h4>
@@ -163,7 +192,7 @@ function ActionPlan({ actionItems, overallGrade, quizRisk, contractFlags }) {
         {plan.map((act, idx) =>
           <li key={idx}>
             <span className="actionplan-dot" style={{
-              filter: idx === 0 ? "brightness(1.04) saturate(1.12)" : "",
+              filter: idx === 0 ? "brightness(1.12) saturate(1.18)" : "",
               marginRight:9
             }} />
             {act}
