@@ -14,6 +14,8 @@
  */
 
 import React, { useState, useEffect } from 'react';
+// Animation group
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
 // Step Components
 import StepWelcome from '../steps/StepWelcome';
 import StepCyberQuiz from '../steps/StepCyberQuiz';
@@ -108,36 +110,48 @@ function MainContainer() {
       />
       {/* Example: Progress bar (renders except last/thank you step) */}
       {currentStep < steps.length - 1 && (
-        <ProgressBar current={currentStep} total={steps.length - 1} />
+        <div className="progress-bar-anim">
+          <ProgressBar current={currentStep} total={steps.length - 1} />
+        </div>
       )}
-      {/* Step content */}
-      <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
-        {/* For Dashboard, supply full quiz + contract state. Other steps receive standard props. */}
-        <StepComponent
-          appData={appData}
-          setAppData={setAppData}
-          goToNextStep={goToNextStep}
-          goToPrevStep={goToPrevStep}
-          currentStep={currentStep}
-          user={user}
-          // Pass quiz/contract details for deep insights to Dashboard
-          {...(StepComponent === steps[3].component
-            ? {
-                // Quiz details
-                quizScore: appData.quizScore,
-                quizRisk: appData.quizRisk,
-                quizResults: appData.quizResults,
-                // Contract details
-                contractRisk: appData.contractRisk,
-                contractFlags: appData.contractFlags,
-                contractRecs: appData.contractRecs,
-                // Whether the user actually submitted/uploaded/pasted a contract
-                contractUploaded: appData.contractUploaded,
-                user  // <-- Explicitly forward user to StepDashboard for report saving
-              }
-            : {})}
-        />
-      </div>
+      {/* Step content with slide/fade animation */}
+      <TransitionGroup
+        component={null}
+      >
+        <CSSTransition
+          key={currentStep}
+          timeout={450}
+          classNames="step-animate"
+        >
+          <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+            {/* For Dashboard, supply full quiz + contract state. Other steps receive standard props. */}
+            <StepComponent
+              appData={appData}
+              setAppData={setAppData}
+              goToNextStep={goToNextStep}
+              goToPrevStep={goToPrevStep}
+              currentStep={currentStep}
+              user={user}
+              // Pass quiz/contract details for deep insights to Dashboard
+              {...(StepComponent === steps[3].component
+                ? {
+                    // Quiz details
+                    quizScore: appData.quizScore,
+                    quizRisk: appData.quizRisk,
+                    quizResults: appData.quizResults,
+                    // Contract details
+                    contractRisk: appData.contractRisk,
+                    contractFlags: appData.contractFlags,
+                    contractRecs: appData.contractRecs,
+                    // Whether the user actually submitted/uploaded/pasted a contract
+                    contractUploaded: appData.contractUploaded,
+                    user  // <-- Explicitly forward user to StepDashboard for report saving
+                  }
+                : {})}
+            />
+          </div>
+        </CSSTransition>
+      </TransitionGroup>
       {/* Tiny auth bar (for mobile, not visible in navbar) - Optional */}
       {/* 
       <div style={{ marginTop: 16 }}>
@@ -147,6 +161,7 @@ function MainContainer() {
         }
       </div>
       */}
+      {/* Micro-animation for CTA: handled in CSS/view, buttons in steps have .btn class */}
     </div>
   );
 }

@@ -175,6 +175,8 @@ body,
   margin-bottom: 16px;
 }
 
+/* --- Animations and Transitions for Steps & Buttons --- */
+
 .btn {
   background: linear-gradient(90deg, var(--primary), var(--accent));
   color: #fff;
@@ -185,17 +187,113 @@ body,
   font-weight: 500;
   cursor: pointer;
   box-shadow: 0 4px 12px rgba(37,99,235,0.07);
-  transition: background 0.22s cubic-bezier(.42,0,.58,1), box-shadow 0.22s cubic-bezier(.42,0,.58,1);
+  transition:
+    background 0.22s cubic-bezier(.42,0,.58,1),
+    box-shadow 0.22s cubic-bezier(.42,0,.58,1),
+    transform 0.14s cubic-bezier(0.36,0.01,0.86,0.69),
+    outline-color 0.18s;
+  /* Micro-animation pulsing effect when focused (for CTAs) */
+}
+.btn:focus, .btn:active {
+  outline: 2px solid var(--primary, #2563eb);
+  outline-offset: 2px;
+  transform: scale(1.03);
+  box-shadow: 0 4px 16px #fbbf2433, 0 1.5px 4px #2563eb33;
+  z-index: 2;
+  filter: brightness(1.06);
 }
 .btn:hover {
   background: linear-gradient(90deg, var(--accent), var(--primary));
   box-shadow: 0 4px 16px rgba(37,99,235,0.17), 0 1.5px 3px var(--glass-border);
+  transform: scale(1.06) translateY(-2px);
 }
+
 .btn-large {
   padding: 12px 28px;
   font-size: 1.18rem;
   border-radius: 12px;
+  /* Micro-animation: gentle pop */
+  animation: cta-entry 0.64s cubic-bezier(.65,0,.47,1) 0s 1;
 }
+@keyframes cta-entry {
+  0% { transform: scale(0.93) translateY(22px); opacity: 0;}
+  60% { transform: scale(1.05) translateY(-4px); opacity: 1;}
+  100% { transform: scale(1) translateY(0); opacity: 1;}
+}
+
+/* --- Progress Bar micro-animation --- */
+.progress-bar-anim {
+  animation: progress-fadein 0.64s cubic-bezier(.42,0,.58,1) both;
+}
+@keyframes progress-fadein {
+  0% { opacity: 0; transform: translateY(15px);}
+  68% { opacity: 1; transform: translateY(-3px);}
+  100% { opacity: 1; transform: translateY(0);}
+}
+
+/* --- Step transitions: CSSTransition/TransitionGroup --- */
+.step-animate-enter {
+  opacity: 0;
+  transform: translateY(32px) scale(0.98) rotateX(6deg);
+  z-index: 12;
+  pointer-events: none;
+}
+.step-animate-enter-active {
+  opacity: 1;
+  transform: translateY(0) scale(1) rotateX(0deg);
+  transition:
+    opacity 420ms cubic-bezier(.65,0,.47,1),
+    transform 440ms cubic-bezier(.56,.01,.41,1.13);
+  z-index: 12;
+  pointer-events: auto;
+}
+.step-animate-exit {
+  opacity: 1;
+  transform: none;
+}
+.step-animate-exit-active {
+  opacity: 0;
+  transform: translateY(-28px) scale(0.97) rotateX(-4deg);
+  transition:
+    opacity 390ms cubic-bezier(.44,.11,.74,.78),
+    transform 400ms cubic-bezier(.42,0,.58,1);
+  pointer-events: none;
+  z-index: 11;
+}
+.step-animate-enter-done {
+  opacity: 1;
+  transform: none;
+}
+
+/* --- Optional slide/scale/fade combos for each step kind --- */
+.step-animate-enter.step-welcome,
+.step-animate-enter.step-thankyou {
+  transform: scale(0.97) translateY(36px) rotateY(-17deg);
+}
+
+.step-animate-enter.step-cyberquiz {
+  transform: translateX(-42px) scale(0.96) rotateZ(2deg);
+}
+
+.step-animate-enter.step-contractupload {
+  transform: translateX(32px) scale(0.97) rotateZ(-2deg) skewY(-2deg);
+}
+.step-animate-exit.step-contractupload {
+  transform: translateX(-22px) scale(0.96) rotateZ(6deg) skewY(2deg);
+}
+.step-animate-enter.step-dashboard {
+  transform: scale(0.92) translateY(60px) rotateY(18deg);
+}
+.step-animate-exit.step-dashboard {
+  transform: scale(1.03) translateY(-24px) rotateY(0deg);
+}
+.step-animate-exit-active.step-thankyou {
+  opacity: 0;
+  transform: scale(1.04) translateY(-35px) rotateY(8deg);
+}
+
+/* Make sure inner .step content is animated-in using the parent's transition */
+
 
 .theme-toggle-btn {
   background: none;
