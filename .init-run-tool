@@ -1,0 +1,4 @@
+{
+    "command": "PORT=<port> BROWSER=none npm start",
+    "working_directory": "/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub"
+}
