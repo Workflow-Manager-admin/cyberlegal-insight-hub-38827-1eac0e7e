@@ -180,6 +180,17 @@
   100%{opacity:1; transform: translateY(0);}
 }
 
+/* Dashboard toast for CTA feedback */
+.dashboard-toast {
+  animation: toast-popin 0.45s cubic-bezier(.41,0,.59,1) both;
+  box-shadow: 0 6px 34px 0 #2563eb2f;
+}
+@keyframes toast-popin {
+  0% { opacity:0; transform: translateX(-50%) translateY(24px) scale(.91);}
+  68%{opacity:1; transform: translateX(-50%) translateY(-6px) scale(1.04);}
+  100%{opacity:0.99; transform: translateX(-50%) translateY(0) scale(1);}
+}
+
 /* Responsive */
 @media (max-width: 600px) {
   .dashboard-scorecard, .dashboard-panel-card, .dashboard-tab {

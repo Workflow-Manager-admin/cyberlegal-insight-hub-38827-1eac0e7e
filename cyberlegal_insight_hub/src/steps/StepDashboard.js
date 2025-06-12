@@ -9,8 +9,43 @@ import './StepDashboard.css';
  * responsive layout, and stubs for download/email/share.
  */
 
+/** Simple Toast component for demo CTA feedback */
+function DemoToast({ message, onClose }) {
+  React.useEffect(() => {
+    if (!message) return;
+    const timer = setTimeout(onClose, 2000);
+    return () => clearTimeout(timer);
+  }, [message]);
+  if (!message) return null;
+  return (
+    <div
+      className="dashboard-toast"
+      style={{
+        position: "fixed",
+        bottom: 34,
+        left: "50%",
+        transform: "translateX(-50%)",
+        background:
+          "linear-gradient(92deg, var(--primary,#2563eb) 70%, var(--accent,#fbbf24) 130%)",
+        color: "#fff",
+        fontWeight: 600,
+        fontSize: 17,
+        borderRadius: 12,
+        boxShadow: "0 2.5px 24px #2563eb33, 0 1.5px 5px #fff2",
+        padding: "11px 34px",
+        zIndex: 3333,
+        opacity: 0.98,
+        pointerEvents: "none",
+      }}
+      role="status"
+      aria-live="polite"
+    >
+      {message}
+    </div>
+  );
+}
 // PUBLIC_INTERFACE
-function ScoreCard({ quizScore, contractRisk, overallScore, overallGrade }) {
+function ScoreCard({ quizScore, contractRisk, overallScore, overallGrade, showToast }) {
   // Animate main score (on mount & score change).
   const [animatedScore, setAnimatedScore] = useState(0);
   React.useEffect(() => {
@@ -33,15 +68,15 @@ function ScoreCard({ quizScore, contractRisk, overallScore, overallGrade }) {
     return () => raf && cancelAnimationFrame(raf);
   }, [overallScore]);
 
-  // ACTION STUBS
+  // ACTION STUBS - now using toast demo feedback
   const handleDownload = () => {
-    alert("Download as PDF coming soon!");
+    showToast("Download as PDF coming soon!");
   };
   const handleEmail = () => {
-    alert("Email results: Placeholder action.");
+    showToast("Email report: Feature coming soon!");
   };
   const handleShare = () => {
-    alert("Share results: Placeholder action.");
+    showToast("Share dashboard: Coming soon!");
   };
 
   return (
@@ -222,6 +257,12 @@ function StepDashboard({
   contractRecs,
   contractUploaded
 }) {
+  // Toast state for demo CTA feedback
+  const [toastMsg, setToastMsg] = useState("");
+  const showToast = (message) => {
+    setToastMsg(message);
+  };
+
   // Data flow: prefer explicit state from props, else fallback to appData, else demo values
   const mergedQuizScore =
     quizScore ??
@@ -419,7 +460,9 @@ function StepDashboard({
         contractRisk={mergedContractRisk}
         overallScore={summary.riskScore}
         overallGrade={summary.riskGrade}
+        showToast={showToast}
       />
+      <DemoToast message={toastMsg} onClose={() => setToastMsg("")} />
       <div className="dashboard-tabs-nav" role="tablist" aria-label="Dashboard Subsections">
         {TABS.map((t, i) =>
           <button
@@ -450,4 +493,8 @@ function StepDashboard({
   );
 }
 
+// Simple style for the toast feedback (injected inline for demo)
+// In a real app, move to StepDashboard.css
+// Toast will pop down, then fade out
+// Anim class handled by the component; just a quick transition for now.
 export default StepDashboard;
