@@ -19,4 +19,124 @@ cacheable modules 1.37 MiB
       ./.ve/EditorOverlay.css 2.25 KiB [built] [code generated]
       ./node_modules/css-loader/dist/cjs.js!./.ve/EditorOverlay.css 697 bytes [built] [code generated]
     ./.ve/EditorOverlay.jsx 1.58 KiB [built] [code generated]
-webpack 5.99.9 compiled successfully in 1735 ms
+webpack 5.99.9 compiled successfully in 1723 ms
+assets by status 1.92 KiB [cached] 1 asset
+assets by path *.js 1.57 MiB
+  asset bundle.js 1.55 MiB [emitted] (name: main)
+  asset main.d0564858905b19ddf656.hot-update.js 19.1 KiB [emitted] [immutable] [hmr] (name: main)
+asset main.d0564858905b19ddf656.hot-update.json 28 bytes [emitted] [immutable] [hmr]
+Entrypoint main 1.57 MiB = bundle.js 1.55 MiB main.d0564858905b19ddf656.hot-update.js 19.1 KiB
+cached modules 1.37 MiB [cached] 55 modules
+runtime modules 27.5 KiB 14 modules
+javascript modules 13.1 KiB
+  ./src/containers/MainContainer.js 3.96 KiB [built] [code generated]
+  ./src/ui/AuthenticationModal.js 9.14 KiB [built] [code generated]
+webpack 5.99.9 compiled successfully in 83 ms
+assets by status 1.92 KiB [cached] 1 asset
+assets by path *.js 1.56 MiB
+  asset bundle.js 1.55 MiB [emitted] (name: main)
+  asset main.f4c861d110f11271d572.hot-update.js 8.43 KiB [emitted] [immutable] [hmr] (name: main)
+asset main.f4c861d110f11271d572.hot-update.json 28 bytes [emitted] [immutable] [hmr]
+Entrypoint main 1.56 MiB = bundle.js 1.55 MiB main.f4c861d110f11271d572.hot-update.js 8.43 KiB
+cached modules 1.38 MiB [cached] 56 modules
+runtime modules 27.5 KiB 14 modules
+./src/containers/MainContainer.js 4.97 KiB [built] [code generated]
+webpack 5.99.9 compiled successfully in 75 ms
+assets by status 1.92 KiB [cached] 1 asset
+assets by path *.js 1.4 MiB
+  asset bundle.js 1.39 MiB [emitted] (name: main)
+  asset main.d51403b1da2694a90dbc.hot-update.js 10.9 KiB [emitted] [immutable] [hmr] (name: main)
+asset main.d51403b1da2694a90dbc.hot-update.json 602 bytes [emitted] [immutable] [hmr]
+Entrypoint main 1.4 MiB = bundle.js 1.39 MiB main.d51403b1da2694a90dbc.hot-update.js 10.9 KiB
+cached modules 1.26 MiB [cached] 38 modules
+runtime modules 27.5 KiB 14 modules
+javascript modules 569 bytes
+  ./src/index.js 530 bytes [code generated]
+  ./src/App.js 39 bytes [built] [code generated] [1 error]
+
+ERROR in ./src/App.js
+Module build failed (from ./node_modules/babel-loader/lib/index.js):
+SyntaxError: /home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/src/App.js: Unexpected token (139:18)
+
+  137 |       <React.Suspense fallback={null}>
+  138 |         {isAuthModalOpen && (
+> 139 |           <require('../ui/AuthenticationModal').default
+      |                   ^
+  140 |             isOpen={isAuthModalOpen}
+  141 |             onClose={() => setAuthModalOpen(false)}
+  142 |             onAuthenticate={handleAuthenticated}
+    at constructor (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/parser/lib/index.js:363:19)
+    at JSXParserMixin.raise (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/parser/lib/index.js:6609:19)
+    at JSXParserMixin.unexpected (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/parser/lib/index.js:6629:16)
+    at JSXParserMixin.jsxParseIdentifier (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/parser/lib/index.js:4581:12)
+    at JSXParserMixin.jsxParseNamespacedName (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/parser/lib/index.js:4588:23)
+    at JSXParserMixin.jsxParseAttribute (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/parser/lib/index.js:4664:22)
+    at JSXParserMixin.jsxParseOpeningElementAfterName (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/parser/lib/index.js:4679:28)
+    at JSXParserMixin.jsxParseOpeningElementAt (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/parser/lib/index.js:4674:17)
+    at JSXParserMixin.jsxParseElementAt (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/parser/lib/index.js:4698:33)
+    at JSXParserMixin.jsxParseElement (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/parser/lib/index.js:4761:17)
+    at JSXParserMixin.parseExprAtom (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/parser/lib/index.js:4771:19)
+    at JSXParserMixin.parseExprSubscripts (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/parser/lib/index.js:11012:23)
+    at JSXParserMixin.parseUpdate (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/parser/lib/index.js:10997:21)
+    at JSXParserMixin.parseMaybeUnary (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/parser/lib/index.js:10977:23)
+    at JSXParserMixin.parseMaybeUnaryOrPrivate (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/parser/lib/index.js:10830:61)
+    at JSXParserMixin.parseExprOps (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/parser/lib/index.js:10835:23)
+    at JSXParserMixin.parseMaybeConditional (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/parser/lib/index.js:10812:23)
+    at JSXParserMixin.parseMaybeAssign (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/parser/lib/index.js:10765:21)
+    at /home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/parser/lib/index.js:10734:39
+    at JSXParserMixin.allowInAnd (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/parser/lib/index.js:12361:12)
+    at JSXParserMixin.parseMaybeAssignAllowIn (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/parser/lib/index.js:10734:17)
+    at JSXParserMixin.parseParenAndDistinguishExpression (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/parser/lib/index.js:11608:28)
+    at JSXParserMixin.parseExprAtom (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/parser/lib/index.js:11262:23)
+    at JSXParserMixin.parseExprAtom (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/parser/lib/index.js:4776:20)
+    at JSXParserMixin.parseExprSubscripts (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/parser/lib/index.js:11012:23)
+    at JSXParserMixin.parseUpdate (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/parser/lib/index.js:10997:21)
+    at JSXParserMixin.parseMaybeUnary (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/parser/lib/index.js:10977:23)
+    at JSXParserMixin.parseMaybeUnaryOrPrivate (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/parser/lib/index.js:10830:61)
+    at JSXParserMixin.parseExprOpBaseRightExpr (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/parser/lib/index.js:10917:34)
+    at JSXParserMixin.parseExprOpRightExpr (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/parser/lib/index.js:10912:21)
+    at JSXParserMixin.parseExprOp (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/parser/lib/index.js:10878:27)
+    at JSXParserMixin.parseExprOps (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/parser/lib/index.js:10839:17)
+    at JSXParserMixin.parseMaybeConditional (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/parser/lib/index.js:10812:23)
+    at JSXParserMixin.parseMaybeAssign (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/parser/lib/index.js:10765:21)
+    at JSXParserMixin.parseExpressionBase (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/parser/lib/index.js:10718:23)
+    at /home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/parser/lib/index.js:10714:39
+    at JSXParserMixin.allowInAnd (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/parser/lib/index.js:12361:12)
+    at JSXParserMixin.parseExpression (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/parser/lib/index.js:10714:17)
+    at JSXParserMixin.jsxParseExpressionContainer (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/parser/lib/index.js:4644:31)
+    at JSXParserMixin.jsxParseElementAt (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/parser/lib/index.js:4723:36)
+    at JSXParserMixin.jsxParseElementAt (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/parser/lib/index.js:4710:32)
+    at JSXParserMixin.jsxParseElement (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/parser/lib/index.js:4761:17)
+    at JSXParserMixin.parseExprAtom (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/parser/lib/index.js:4771:19)
+    at JSXParserMixin.parseExprSubscripts (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/parser/lib/index.js:11012:23)
+    at JSXParserMixin.parseUpdate (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/parser/lib/index.js:10997:21)
+    at JSXParserMixin.parseMaybeUnary (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/parser/lib/index.js:10977:23)
+    at JSXParserMixin.parseMaybeUnaryOrPrivate (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/parser/lib/index.js:10830:61)
+    at JSXParserMixin.parseExprOps (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/parser/lib/index.js:10835:23)
+    at JSXParserMixin.parseMaybeConditional (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/parser/lib/index.js:10812:23)
+    at JSXParserMixin.parseMaybeAssign (/home/kavia/workspace/code-generation/cyberlegal-insight-hub-38827-1eac0e7e/cyberlegal_insight_hub/node_modules/@babel/parser/lib/index.js:10765:21)
+ @ ./src/index.js 5:0-24 11:32-35
+
+webpack 5.99.9 compiled with 1 error in 44 ms
+assets by status 1.92 KiB [cached] 1 asset
+assets by path *.js 1.73 MiB
+  asset bundle.js 1.55 MiB [emitted] (name: main)
+  asset main.1f3315ab9ad3fe690231.hot-update.js 180 KiB [emitted] [immutable] [hmr] (name: main)
+asset main.1f3315ab9ad3fe690231.hot-update.json 28 bytes [emitted] [immutable] [hmr]
+Entrypoint main 1.73 MiB = bundle.js 1.55 MiB main.1f3315ab9ad3fe690231.hot-update.js 180 KiB
+cached modules 1.38 MiB [cached] 55 modules
+runtime modules 27.5 KiB 14 modules
+javascript modules 6.87 KiB
+  ./src/index.js 530 bytes [code generated]
+  ./src/App.js 6.36 KiB [built] [code generated]
+webpack 5.99.9 compiled successfully in 94 ms
+assets by status 1.92 KiB [cached] 1 asset
+assets by path *.js 1.56 MiB
+  asset bundle.js 1.55 MiB [emitted] (name: main)
+  asset main.de1a98b7188fd8da09e9.hot-update.js 10.1 KiB [emitted] [immutable] [hmr] (name: main)
+asset main.de1a98b7188fd8da09e9.hot-update.json 28 bytes [emitted] [immutable] [hmr]
+Entrypoint main 1.56 MiB = bundle.js 1.55 MiB main.de1a98b7188fd8da09e9.hot-update.js 10.1 KiB
+cached modules 1.38 MiB [cached] 56 modules
+runtime modules 27.5 KiB 14 modules
+./src/App.js 6.42 KiB [built] [code generated]
+webpack 5.99.9 compiled successfully in 77 ms

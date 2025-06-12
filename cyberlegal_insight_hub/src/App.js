@@ -3,12 +3,40 @@ import './App.css';
 import MainContainer from './containers/MainContainer';
 import ThemeToggle from './ui/ThemeToggle';
 import CyberLegalLogo from './ui/CyberLegalLogo';
+import AuthenticationModal from './ui/AuthenticationModal';
 
 /**
  * App.js
  * Root of the React app.  Renders global layout (navbar, theme) and loads the main container.
  */
 function App() {
+  // "Lift" authentication state into App for navbar integration
+  const [user, setUser] = React.useState(() => {
+    try {
+      const stored = window.localStorage.getItem('cyberlegalUser');
+      if (stored) return JSON.parse(stored);
+      return null;
+    } catch {
+      return null;
+    }
+  });
+  const [isAuthModalOpen, setAuthModalOpen] = React.useState(false);
+
+  // Handle authentication from modal or subcomponents
+  function handleAuthenticated(authUser) {
+    setUser(authUser);
+    setAuthModalOpen(false);
+  }
+  // Logout clears storage/user
+  function handleLogout() {
+    setUser(null);
+    window.localStorage.removeItem('cyberlegalUser');
+    setAuthModalOpen(false);
+  }
+
+  // Pass user, handleAuthenticated, and modal state down to MainContainer
+  // MainContainer uses its own authentication, for the steps, but navbar also has a button for profile/login
+
   return (
     <div className="app">
       <nav className="navbar">
@@ -46,11 +74,72 @@ function App() {
                 CyberLegal Insight Hub
               </span>
             </div>
-            {/* Global controls - Theme toggle */}
-            <ThemeToggle />
+            {/* Global controls - Theme toggle and Authentication/Profile */}
+            <div style={{ display: "flex", alignItems: "center", gap: 13 }}>
+              <ThemeToggle />
+              {/* Profile/Login button in navbar (visible on all pages) */}
+              {user ? (
+                <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+                  <span
+                    style={{
+                      fontWeight: 700,
+                      color: "var(--primary,#2563eb)",
+                      fontSize: "1rem",
+                      background: "rgba(251,191,36,0.13)",
+                      borderRadius: 9,
+                      padding: "2.5px 11px"
+                    }}
+                  >
+                    {user.isGuest ? "Guest" : user.username}
+                  </span>
+                  <button
+                    className="btn"
+                    style={{
+                      padding: "6px 13px",
+                      borderRadius: 7,
+                      fontSize: 13,
+                      background: "rgba(232,122,65,0.11)",
+                      color: "var(--kavia-orange,#E87A41)",
+                      fontWeight: 700,
+                      marginLeft: 2,
+                      transition: "background 0.19s"
+                    }}
+                    onClick={handleLogout}
+                    title="Log Out"
+                  >
+                    Log Out
+                  </button>
+                </div>
+              ) : (
+                <button
+                  className="btn"
+                  style={{
+                    padding: "6px 13px",
+                    borderRadius: 7,
+                    fontSize: 13,
+                    background: "rgba(232,122,65,0.15)",
+                    color: "var(--kavia-orange,#E87A41)",
+                    fontWeight: 700,
+                    marginLeft: 2,
+                    transition: "background 0.17s"
+                  }}
+                  onClick={() => setAuthModalOpen(true)}
+                  title="Sign In / Register"
+                >
+                  <span role="img" aria-label="profile" style={{ marginRight: 6 }}>👤</span>Login / Sign Up
+                </button>
+              )}
+            </div>
           </div>
         </div>
       </nav>
+      {/* AuthenticationModal (placed here so it appears above App/nav/main) */}
+      {/* Pass handleAuthenticated from here so Navbar login/logout works */}
+      <AuthenticationModal
+        isOpen={isAuthModalOpen}
+        onClose={() => setAuthModalOpen(false)}
+        onAuthenticate={handleAuthenticated}
+      />
       <main>
         <div className="container" style={{ paddingTop: 100 }}>
           {/* MainContainer orchestrates the entire step flow */}

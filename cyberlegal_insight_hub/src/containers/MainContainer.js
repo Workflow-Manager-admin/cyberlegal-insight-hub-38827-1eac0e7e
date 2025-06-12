@@ -13,15 +13,16 @@
  * - Future: consider useReducer or a state manager if step complexity grows.
  */
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 // Step Components
 import StepWelcome from '../steps/StepWelcome';
 import StepCyberQuiz from '../steps/StepCyberQuiz';
 import StepContractUpload from '../steps/StepContractUpload';
 import StepDashboard from '../steps/StepDashboard';
 import StepThankYou from '../steps/StepThankYou';
-// UI components (example import)
+// UI components
 import { ProgressBar } from '../ui/ProgressBar';
+import AuthenticationModal from '../ui/AuthenticationModal';
 
 // PUBLIC_INTERFACE
 const steps = [
@@ -42,6 +43,35 @@ function MainContainer() {
   const [appData, setAppData] = useState({
     // Attach quiz answers, contract text, calculated risk, etc.
   });
+
+  // --- Authentication STATE ---
+  // user: {username, isGuest} | null
+  const [user, setUser] = useState(null);
+  const [isAuthModalOpen, setAuthModalOpen] = useState(false);
+
+  // Load user from localStorage, if present (on mount)
+  useEffect(() => {
+    const stored = window.localStorage.getItem('cyberlegalUser');
+    if (stored) {
+      try {
+        setUser(JSON.parse(stored));
+      } catch { setUser(null); }
+    }
+  }, []);
+
+  // Handle manual logout
+  // PUBLIC_INTERFACE
+  function handleLogout() {
+    setUser(null);
+    window.localStorage.removeItem('cyberlegalUser');
+    setAuthModalOpen(false);
+  }
+
+  // When auth finishes (login/signup/guest), user is set
+  // PUBLIC_INTERFACE
+  function handleAuthenticated(authUser) {
+    setUser(authUser);
+  }
 
   // Step navigation logic; passed to children as needed
   const goToNextStep = (extraData = {}) => {
@@ -70,6 +100,12 @@ function MainContainer() {
       }}
       tabIndex={-1}
     >
+      {/* Authentication Modal (login/signup/guest selection) */}
+      <AuthenticationModal
+        isOpen={isAuthModalOpen}
+        onClose={() => setAuthModalOpen(false)}
+        onAuthenticate={handleAuthenticated}
+      />
       {/* Example: Progress bar (renders except last/thank you step) */}
       {currentStep < steps.length - 1 && (
         <ProgressBar current={currentStep} total={steps.length - 1} />
@@ -83,6 +119,7 @@ function MainContainer() {
           goToNextStep={goToNextStep}
           goToPrevStep={goToPrevStep}
           currentStep={currentStep}
+          user={user}
           // Pass quiz/contract details for deep insights to Dashboard
           {...(StepComponent === steps[3].component
             ? {
@@ -100,6 +137,15 @@ function MainContainer() {
             : {})}
         />
       </div>
+      {/* Tiny auth bar (for mobile, not visible in navbar) - Optional */}
+      {/* 
+      <div style={{ marginTop: 16 }}>
+        {user
+          ? <span>Welcome, {user.username} <button className="btn" onClick={handleLogout}>Log Out</button></span>
+          : <button className="btn" onClick={() => setAuthModalOpen(true)}>Login / Sign Up</button>
+        }
+      </div>
+      */}
     </div>
   );
 }
