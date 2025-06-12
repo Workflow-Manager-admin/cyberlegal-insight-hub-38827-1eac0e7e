@@ -101,15 +101,39 @@ body,
   font-weight: 600;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   color: var(--text-color);
   transition: var(--theme-transition);
+  min-height: 36px;
+  /* Prevent shrinking brand on mobile, allow SVG + text to flow */
+  flex-shrink: 0;
 }
 
+.logo svg {
+  display: block;
+  min-width: 30px;
+  min-height: 30px;
+  max-height: 42px;
+  max-width: 46px;
+  margin-right: 3px;
+}
+
+@media (max-width: 470px) {
+  .logo {
+    font-size: 1.03rem;
+    gap: 7px;
+  }
+  .logo svg {
+    min-width: 23px;
+    min-height: 23px;
+    max-width: 30px;
+    max-height: 30px;
+  }
+}
+
+/* Remove old logo-symbol if present, as not needed anymore */
 .logo-symbol {
-  color: var(--primary, #2563eb);
-  font-size: 1.3em;
-  font-weight: bold;
+  display: none !important;
 }
 
 .container {
